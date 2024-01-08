@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "gluchart"
+version = "0.1.0"
+description = ""
+authors = ["Gerard Hager"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^5.0.1"
+django-rest-framework = "^0.1.0"
+psycopg = "^3.1.17"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
