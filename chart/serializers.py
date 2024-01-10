@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from models import Source, GlucoseValue
+from .models import Source, GlucoseValue
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
