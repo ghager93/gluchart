@@ -1,8 +1,11 @@
-.PHONY: run install migrate source-activate source-deactivate
+.PHONY: manage run install migrate venv
 
 VENV = venv
 PYTHON = $(VENV)/bin/python3
 POETRY = $(VENV)/bin/poetry
+
+manage:
+	$(POETRY) run $(PYTHON) manage.py
 
 run:
 	$(POETRY) run $(PYTHON) manage.py runserver
