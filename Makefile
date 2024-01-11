@@ -1,4 +1,4 @@
-.PHONY: manage run install migrate venv
+.PHONY: manage run install migrate venv shell
 
 VENV = venv
 PYTHON = $(VENV)/bin/python3
@@ -14,6 +14,10 @@ install:
 	$(POETRY) install
 
 migrate:
+	$(POETRY) run $(PYTHON) manage.py makemigrations
 	$(POETRY) run $(PYTHON) manage.py migrate
+
+shell:
+	$(POETRY) run $(PYTHON) manage.py shell
 
 
