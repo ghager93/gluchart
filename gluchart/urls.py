@@ -29,4 +29,5 @@ router.register(r'values', views.GlucoseValueViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('batch', views.GlucoseValueBatchCreate.as_view(), name='batch')
 ]
