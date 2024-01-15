@@ -1,6 +1,7 @@
 import csv
-
 from io import TextIOWrapper
+
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets, views, response, status
 from django_filters.rest_framework import DjangoFilterBackend
@@ -48,10 +49,10 @@ class GlucoseValueBatchCreate(views.APIView):
             csv_reader = csv.reader(text_file)
             
             # Process each row in the CSV file
-            for row in csv_reader:
-                print(row)
+            bulk_create_objs = [GlucoseValue(value=row[1], time_of_reading=row[0]) for row in csv_reader]
+            GlucoseValue.objects.bulk_create(bulk_create_objs)
             
-            return response.Response("test", status=status.HTTP_200_OK)
+            return response.Response(f"{len(bulk_create_objs)} values added.", status=status.HTTP_200_OK)
         except Exception as e:
             return response.Response(str(e), status=status.HTTP_400_BAD_REQUEST)
     
@@ -63,5 +64,18 @@ def is_csv_type(file_obj):
 def is_csv_size_okay(file_obj):
     MAX_CSV_FILE_SIZE_MB = 5
     return file_obj.size <= MAX_CSV_FILE_SIZE_MB * 1024 * 1024
+
+
+class SampleView(views.View):
+    template_name = 'sample.html'
+
+    def get(self, request):
+        entry = GlucoseValue.objects.first()
+
+        return render(request, self.template_name, {
+            'var': 'this is a var',
+            'entry': entry
+        })
+
     
 
