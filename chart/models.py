@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Source(models.Model):
@@ -23,6 +24,7 @@ class GlucoseValue(models.Model):
     value = models.CharField(max_length=10)
     time_of_reading = models.DateTimeField()
     source = models.ForeignKey(to=Source, on_delete=models.SET_DEFAULT, default=Source.get_default_pk)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 

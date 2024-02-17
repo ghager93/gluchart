@@ -1,6 +1,7 @@
 import csv
 from io import TextIOWrapper
 
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets, views, response, status
@@ -74,8 +75,18 @@ class SampleView(views.View):
 
         return render(request, self.template_name, {
             'var': 'this is a var',
-            'entry': entry
+            'entry': entry,
+            'user': request.user
         })
+    
+cnt = 0
+    
+
+def update_view(request: HttpRequest):
+    global cnt
+    cnt += 1
+    return HttpResponse(cnt)
+
 
     
 
