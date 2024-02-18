@@ -68,16 +68,10 @@ def is_csv_size_okay(file_obj):
 
 
 class SampleView(views.View):
-    template_name = 'sample.html'
+    template_name = 'graph.html'
 
     def get(self, request):
-        entry = GlucoseValue.objects.first()
-
-        return render(request, self.template_name, {
-            'var': 'this is a var',
-            'entry': entry,
-            'user': request.user
-        })
+        return render(request, self.template_name)
     
 cnt = 0
     

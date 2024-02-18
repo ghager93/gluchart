@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../../output.css" rel="stylesheet" />
+    <link href="../../static/tailwind-output.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <script
       src="https://cdn.plot.ly/plotly-2.27.0.min.js"
@@ -872,12 +872,10 @@
           resize_()
           function resize_() {
             var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
-            console.log(plot)
             Plotly.Plots.resize(plot);
           }
           document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c").on('plotly_relayout', function(eventdata) {
             let max_x_value = new Date("2024-02-18 16:59:00Z")
-            console.log(max_x_value.toISOString())
             if (eventdata['xaxis.range[0]'] !== undefined) {
               // Ensure that the maximum x value is not exceeded
               var new_max_x = new Date(Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value));

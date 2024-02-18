@@ -1,0 +1,52 @@
+{# Base layout with navbar and page content #} 
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block layout %}
+<div class="flex flex-col h-screen justify-stretch bg-slate-100">
+  <header>
+  {% block header %}
+    <div
+      class="flex items-center justify-between bg-slate-200 w-screen[-2] m-1 rounded-lg shadow"
+    >
+      <div class="flex items-center">
+        <a href="#home">
+          <img src="{% static 'pinglu_transparent.png' %}" class="m-2 rounded-lg size-20" />
+        </a>
+        <h1 class="text-4xl text-slate-600 font-semibold">Glu.ui/Iglu</h1>
+      </div>
+      <div class="flex flex-row">
+        <div
+          class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow"
+        >
+          <a
+            href="#menu-item-1"
+            class="text-slate-200 group-hover:text-slate-600 text-center align-middle"
+          >
+            Log in
+          </a>
+        </div>
+        <div
+          class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow"
+        >
+          <a
+            href="#menu-item-1"
+            class="text-slate-200 group-hover:text-slate-600 text-center align-middle"
+          >
+            Sign up
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+  </header>
+  <main>
+  {% include 'navbar.html' %}
+  {% block content %}
+  {% endblock %}
+  </main>
+  <footer>
+  {% block footer %}
+  {% endblock %}
+</div>
+{% endblock %}
