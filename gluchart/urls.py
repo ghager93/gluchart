@@ -30,6 +30,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('batch', views.GlucoseValueBatchCreate.as_view(), name='batch'),
-    path('sample', views.SampleView.as_view(), name='sample'),
-    path('update', views.update_view, name='update')
+    path('sample', views.GraphView.as_view(), name='sample'),
+    path('entries', views.EntriesView.as_view(), name='entries')
 ]

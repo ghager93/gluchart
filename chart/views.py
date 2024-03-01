@@ -67,19 +67,27 @@ def is_csv_size_okay(file_obj):
     return file_obj.size <= MAX_CSV_FILE_SIZE_MB * 1024 * 1024
 
 
-class SampleView(views.View):
+class GraphView(views.View):
     template_name = 'graph.html'
 
     def get(self, request):
-        return render(request, self.template_name)
-    
-cnt = 0
+        x_values = list(range(10))
+        y_values = [x**2/10 + 5 for x in x_values]
+        y_values[3] = None
+        return render(request, self.template_name, {
+            "x_values": f"{x_values}",
+            "y_values": f"{y_values}".replace("None", "")
+        })
     
 
-def update_view(request: HttpRequest):
-    global cnt
-    cnt += 1
-    return HttpResponse(cnt)
+class EntriesView(views.View):
+    def get(self, request):
+        return HttpResponse(GlucoseValue.objects.filter(time_of_reading__lt="2020-01-06T00:00:00Z").values('time_of_reading', 'value'))
+        
+
+
+
+
 
 
     

@@ -40,13 +40,17 @@
     </div>
   {% endblock %}
   </header>
-  <main>
+  <main class="flex flex-grow">
   {% include 'navbar.html' %}
   {% block content %}
   {% endblock %}
   </main>
   <footer>
   {% block footer %}
+    <div class=" bg-slate-200 w-screen[-2] m-1 rounded-lg shadow">
+      {% lorem 1 b random %}
+    </div>
   {% endblock %}
+  </footer>
 </div>
 {% endblock %}
