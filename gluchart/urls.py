@@ -31,6 +31,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('batch', views.GlucoseValueBatchCreate.as_view(), name='batch'),
     path('graph', views.GraphView.as_view(), name='graph'),
-    path('login', views.LoginView.as_view(), name='login'),
+    # path('login', views.GluLoginView.as_view(), name='login'),
     path('entries', views.EntriesView.as_view(), name='entries')
+]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls'))
 ]

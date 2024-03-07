@@ -3,6 +3,7 @@ from io import TextIOWrapper
 
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets, views, response, status
 from django_filters.rest_framework import DjangoFilterBackend
@@ -85,12 +86,24 @@ class EntriesView(views.View):
         return HttpResponse(GlucoseValue.objects.filter(time_of_reading__lt="2020-01-06T00:00:00Z").values('time_of_reading', 'value'))
     
 
+# class LoginView(views.View):
+#     template_name = 'login.html'
+
+#     def get(self, request):
+#         return render(request, self.template_name)
+    
+#     def post(self, request):
+#         print(request)
+        
 class LoginView(views.View):
-    template_name = 'login.html'
+    template_name = "registration/login.html"
+    next_page = "/graph"
 
     def get(self, request):
         return render(request, self.template_name)
-        
+    
+    def post(self, request):
+        print(request.POST)
 
 
 

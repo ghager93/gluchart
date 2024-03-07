@@ -8,16 +8,18 @@
           <img src="../../static/pinglu_transparent.png" class="m-2 rounded-lg size-20" />
           <h1 class="text-4xl text-slate-600 font-semibold">Glu.ui</h1>
         </div>
-        <form class="flex flex-col gap-2 items-center" action="/login" method="post">
+        <form class="flex flex-col gap-2 items-center" action="{% url 'login' %}" method="post">
+          {% csrf_token %}
           <div class="flex flex-col min-h-20">
-            <input class="bg-cyan-50 rounded-t-lg border-2 h-1/2 focus:z-10 mb-[-1px]" id="id_username" type="text" placeholder="Username">
-            <input class="bg-cyan-50 rounded-b-lg border-2 h-1/2" id="id_password" type="password" placeholder="Password">
+            <input class="bg-cyan-50 rounded-t-lg border-2 h-1/2 focus:z-10 mb-[-2px]" id="id_username" type="text" name="username" placeholder="Username">
+            <input class="bg-cyan-50 rounded-b-lg border-2 h-1/2" id="id_password" type="password" name="password" placeholder="Password">
           </div>
-          <div class="m-1 bg-cyan-500 rounded-lg h-8 w-32 text-center group hover:bg-cyan-200 shadow">
+          <div class="m-1 bg-cyan-500 rounded-lg h-8 w-full text-center group hover:bg-cyan-200 shadow">
             <button class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
               Log in
             </button>
-          </div>  
+          </div>
+          <input type="submit" value="Log in">
         </form>
 
       </div>

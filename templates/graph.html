@@ -422,7 +422,9 @@
                     "zoomin",
                     "zoomout",
                     "autoscale",
-                    "toimage"
+                    "toimage",
+                    "select",
+                    "lasso"
                   ]
                 },
                 dragmode: "pan"
@@ -483,6 +485,13 @@
         <div>
           <img src="{% static 'icons8-arrow-96.png' %}" class="m-auto rotate-45"/> 
         </div>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit">Logout</button>
+        </form>
+        <div>
+          {{ user.username }}
+          {{ user.is_authenticated }}
       </div>
     </div>
   </div>
