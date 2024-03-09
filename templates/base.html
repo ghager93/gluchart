@@ -1,7 +1,6 @@
-{# Base template for pages #}
-{% load static %}
+{# Base template for pages #} {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,11 +15,7 @@
   </head>
 
   <body>
-    {# Page layout #}
-    {% block layout %}{% endblock %}
-
-    {# Additional Javascript #}
-    {% block javascript %}{% endblock %}
-
+    {# Page layout #} {% block layout %}{% endblock %} {# Additional Javascript
+    #} {% block javascript %}{% endblock %}
   </body>
 </html>

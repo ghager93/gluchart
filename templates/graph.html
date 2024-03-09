@@ -1,317 +1,37 @@
-{% extends 'layout.html' %}
-{% load static %}
-{% block content %}
-<div class="mr-1 mb-1 flex flex-grow bg-slate-200 rounded-lg shadow p-2 h-min-80 gap-2">
-    <div class="border-dashed border-2 border-red-400 flex-grow">
-      <div class="m-2 flex-initial top-0 right-0 bg-slate-300 rounded-lg shadow p-1">
-        <div
-          id="05157df0-c8a6-41fd-8480-a60e5820656c"
-          class="plotly-graph-div overflow-auto"
-        ></div>
-      </div>
+{% extends 'layout.html' %} {% load static %} {% block content %}
+<div
+  class="h-min-80 mb-1 mr-1 flex flex-grow gap-2 rounded-lg bg-slate-200 p-2 shadow"
+>
+  <div class="flex-grow border-2 border-dashed border-red-400">
+    <div
+      class="right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-1 shadow"
+    >
+      <div
+        id="05157df0-c8a6-41fd-8480-a60e5820656c"
+        class="plotly-graph-div overflow-auto"
+      ></div>
     </div>
-    <script type="text/javascript">
-      window.PLOTLYENV = window.PLOTLYENV || {};
-      if (document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c")) {
-        Plotly.newPlot(
-          "05157df0-c8a6-41fd-8480-a60e5820656c",
-          [
-            {
-              x: {{ x_values|default:"[0, 1, 2]" }},
-              y: {{ y_values|default:"[5, 7, 11]" }},
-              type: "scatter",
-            },
-          ],
+  </div>
+  <script type="text/javascript">
+    window.PLOTLYENV = window.PLOTLYENV || {};
+    if (document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c")) {
+      Plotly.newPlot(
+        "05157df0-c8a6-41fd-8480-a60e5820656c",
+        [
           {
-            template: {
-              data: {
-                histogram2dcontour: [
-                  {
-                    type: "histogram2dcontour",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                    colorscale: [
-                      [0.0, "#0d0887"],
-                      [0.1111111111111111, "#46039f"],
-                      [0.2222222222222222, "#7201a8"],
-                      [0.3333333333333333, "#9c179e"],
-                      [0.4444444444444444, "#bd3786"],
-                      [0.5555555555555556, "#d8576b"],
-                      [0.6666666666666666, "#ed7953"],
-                      [0.7777777777777778, "#fb9f3a"],
-                      [0.8888888888888888, "#fdca26"],
-                      [1.0, "#f0f921"],
-                    ],
-                  },
-                ],
-                choropleth: [
-                  {
-                    type: "choropleth",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                  },
-                ],
-                histogram2d: [
-                  {
-                    type: "histogram2d",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                    colorscale: [
-                      [0.0, "#0d0887"],
-                      [0.1111111111111111, "#46039f"],
-                      [0.2222222222222222, "#7201a8"],
-                      [0.3333333333333333, "#9c179e"],
-                      [0.4444444444444444, "#bd3786"],
-                      [0.5555555555555556, "#d8576b"],
-                      [0.6666666666666666, "#ed7953"],
-                      [0.7777777777777778, "#fb9f3a"],
-                      [0.8888888888888888, "#fdca26"],
-                      [1.0, "#f0f921"],
-                    ],
-                  },
-                ],
-                heatmap: [
-                  {
-                    type: "heatmap",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                    colorscale: [
-                      [0.0, "#0d0887"],
-                      [0.1111111111111111, "#46039f"],
-                      [0.2222222222222222, "#7201a8"],
-                      [0.3333333333333333, "#9c179e"],
-                      [0.4444444444444444, "#bd3786"],
-                      [0.5555555555555556, "#d8576b"],
-                      [0.6666666666666666, "#ed7953"],
-                      [0.7777777777777778, "#fb9f3a"],
-                      [0.8888888888888888, "#fdca26"],
-                      [1.0, "#f0f921"],
-                    ],
-                  },
-                ],
-                heatmapgl: [
-                  {
-                    type: "heatmapgl",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                    colorscale: [
-                      [0.0, "#0d0887"],
-                      [0.1111111111111111, "#46039f"],
-                      [0.2222222222222222, "#7201a8"],
-                      [0.3333333333333333, "#9c179e"],
-                      [0.4444444444444444, "#bd3786"],
-                      [0.5555555555555556, "#d8576b"],
-                      [0.6666666666666666, "#ed7953"],
-                      [0.7777777777777778, "#fb9f3a"],
-                      [0.8888888888888888, "#fdca26"],
-                      [1.0, "#f0f921"],
-                    ],
-                  },
-                ],
-                contourcarpet: [
-                  {
-                    type: "contourcarpet",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                  },
-                ],
-                contour: [
-                  {
-                    type: "contour",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                    colorscale: [
-                      [0.0, "#0d0887"],
-                      [0.1111111111111111, "#46039f"],
-                      [0.2222222222222222, "#7201a8"],
-                      [0.3333333333333333, "#9c179e"],
-                      [0.4444444444444444, "#bd3786"],
-                      [0.5555555555555556, "#d8576b"],
-                      [0.6666666666666666, "#ed7953"],
-                      [0.7777777777777778, "#fb9f3a"],
-                      [0.8888888888888888, "#fdca26"],
-                      [1.0, "#f0f921"],
-                    ],
-                  },
-                ],
-                surface: [
-                  {
-                    type: "surface",
-                    colorbar: { outlinewidth: 0, ticks: "" },
-                    colorscale: [
-                      [0.0, "#0d0887"],
-                      [0.1111111111111111, "#46039f"],
-                      [0.2222222222222222, "#7201a8"],
-                      [0.3333333333333333, "#9c179e"],
-                      [0.4444444444444444, "#bd3786"],
-                      [0.5555555555555556, "#d8576b"],
-                      [0.6666666666666666, "#ed7953"],
-                      [0.7777777777777778, "#fb9f3a"],
-                      [0.8888888888888888, "#fdca26"],
-                      [1.0, "#f0f921"],
-                    ],
-                  },
-                ],
-                mesh3d: [
-                  { type: "mesh3d", colorbar: { outlinewidth: 0, ticks: "" } },
-                ],
-                scatter: [
-                  {
-                    fillpattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
-                    type: "scatter",
-                  },
-                ],
-                parcoords: [
-                  {
-                    type: "parcoords",
-                    line: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                scatterpolargl: [
-                  {
-                    type: "scatterpolargl",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                bar: [
-                  {
-                    error_x: { color: "#2a3f5f" },
-                    error_y: { color: "#2a3f5f" },
-                    marker: {
-                      line: { color: "#E5ECF6", width: 0.5 },
-                      pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
-                    },
-                    type: "bar",
-                  },
-                ],
-                scattergeo: [
-                  {
-                    type: "scattergeo",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                scatterpolar: [
-                  {
-                    type: "scatterpolar",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                histogram: [
-                  {
-                    marker: {
-                      pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
-                    },
-                    type: "histogram",
-                  },
-                ],
-                scattergl: [
-                  {
-                    type: "scattergl",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                scatter3d: [
-                  {
-                    type: "scatter3d",
-                    line: { colorbar: { outlinewidth: 0, ticks: "" } },
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                scattermapbox: [
-                  {
-                    type: "scattermapbox",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                scatterternary: [
-                  {
-                    type: "scatterternary",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                scattercarpet: [
-                  {
-                    type: "scattercarpet",
-                    marker: { colorbar: { outlinewidth: 0, ticks: "" } },
-                  },
-                ],
-                carpet: [
-                  {
-                    aaxis: {
-                      endlinecolor: "#2a3f5f",
-                      gridcolor: "white",
-                      linecolor: "white",
-                      minorgridcolor: "white",
-                      startlinecolor: "#2a3f5f",
-                    },
-                    baxis: {
-                      endlinecolor: "#2a3f5f",
-                      gridcolor: "white",
-                      linecolor: "white",
-                      minorgridcolor: "white",
-                      startlinecolor: "#2a3f5f",
-                    },
-                    type: "carpet",
-                  },
-                ],
-                table: [
-                  {
-                    cells: {
-                      fill: { color: "#EBF0F8" },
-                      line: { color: "white" },
-                    },
-                    header: {
-                      fill: { color: "#C8D4E3" },
-                      line: { color: "white" },
-                    },
-                    type: "table",
-                  },
-                ],
-                barpolar: [
-                  {
-                    marker: {
-                      line: { color: "#E5ECF6", width: 0.5 },
-                      pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
-                    },
-                    type: "barpolar",
-                  },
-                ],
-                pie: [{ automargin: true, type: "pie" }],
-              },
-              layout: {
-                autotypenumbers: "strict",
-                colorway: [
-                  "#636efa",
-                  "#EF553B",
-                  "#00cc96",
-                  "#ab63fa",
-                  "#FFA15A",
-                  "#19d3f3",
-                  "#FF6692",
-                  "#B6E880",
-                  "#FF97FF",
-                  "#FECB52",
-                ],
-                font: { color: "#2a3f5f" },
-                hovermode: "closest",
-                hoverlabel: { align: "left" },
-                paper_bgcolor: "transparent",
-                plot_bgcolor: "#E5ECF6",
-                polar: {
-                  bgcolor: "#E5ECF6",
-                  angularaxis: {
-                    gridcolor: "white",
-                    linecolor: "white",
-                    ticks: "",
-                  },
-                  radialaxis: {
-                    gridcolor: "white",
-                    linecolor: "white",
-                    ticks: "",
-                  },
-                },
-                ternary: {
-                  bgcolor: "#E5ECF6",
-                  aaxis: { gridcolor: "white", linecolor: "white", ticks: "" },
-                  baxis: { gridcolor: "white", linecolor: "white", ticks: "" },
-                  caxis: { gridcolor: "white", linecolor: "white", ticks: "" },
-                },
-                coloraxis: { colorbar: { outlinewidth: 0, ticks: "" } },
-                colorscale: {
-                  sequential: [
+            x: {{ x_values|default:"[0, 1, 2]" }},
+            y: {{ y_values|default:"[5, 7, 11]" }},
+            type: "scatter",
+          },
+        ],
+        {
+          template: {
+            data: {
+              histogram2dcontour: [
+                {
+                  type: "histogram2dcontour",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                  colorscale: [
                     [0.0, "#0d0887"],
                     [0.1111111111111111, "#46039f"],
                     [0.2222222222222222, "#7201a8"],
@@ -323,7 +43,19 @@
                     [0.8888888888888888, "#fdca26"],
                     [1.0, "#f0f921"],
                   ],
-                  sequentialminus: [
+                },
+              ],
+              choropleth: [
+                {
+                  type: "choropleth",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                },
+              ],
+              histogram2d: [
+                {
+                  type: "histogram2d",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                  colorscale: [
                     [0.0, "#0d0887"],
                     [0.1111111111111111, "#46039f"],
                     [0.2222222222222222, "#7201a8"],
@@ -335,164 +67,430 @@
                     [0.8888888888888888, "#fdca26"],
                     [1.0, "#f0f921"],
                   ],
-                  diverging: [
-                    [0, "#8e0152"],
-                    [0.1, "#c51b7d"],
-                    [0.2, "#de77ae"],
-                    [0.3, "#f1b6da"],
-                    [0.4, "#fde0ef"],
-                    [0.5, "#f7f7f7"],
-                    [0.6, "#e6f5d0"],
-                    [0.7, "#b8e186"],
-                    [0.8, "#7fbc41"],
-                    [0.9, "#4d9221"],
-                    [1, "#276419"],
+                },
+              ],
+              heatmap: [
+                {
+                  type: "heatmap",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                  colorscale: [
+                    [0.0, "#0d0887"],
+                    [0.1111111111111111, "#46039f"],
+                    [0.2222222222222222, "#7201a8"],
+                    [0.3333333333333333, "#9c179e"],
+                    [0.4444444444444444, "#bd3786"],
+                    [0.5555555555555556, "#d8576b"],
+                    [0.6666666666666666, "#ed7953"],
+                    [0.7777777777777778, "#fb9f3a"],
+                    [0.8888888888888888, "#fdca26"],
+                    [1.0, "#f0f921"],
                   ],
                 },
-                xaxis: {
+              ],
+              heatmapgl: [
+                {
+                  type: "heatmapgl",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                  colorscale: [
+                    [0.0, "#0d0887"],
+                    [0.1111111111111111, "#46039f"],
+                    [0.2222222222222222, "#7201a8"],
+                    [0.3333333333333333, "#9c179e"],
+                    [0.4444444444444444, "#bd3786"],
+                    [0.5555555555555556, "#d8576b"],
+                    [0.6666666666666666, "#ed7953"],
+                    [0.7777777777777778, "#fb9f3a"],
+                    [0.8888888888888888, "#fdca26"],
+                    [1.0, "#f0f921"],
+                  ],
+                },
+              ],
+              contourcarpet: [
+                {
+                  type: "contourcarpet",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                },
+              ],
+              contour: [
+                {
+                  type: "contour",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                  colorscale: [
+                    [0.0, "#0d0887"],
+                    [0.1111111111111111, "#46039f"],
+                    [0.2222222222222222, "#7201a8"],
+                    [0.3333333333333333, "#9c179e"],
+                    [0.4444444444444444, "#bd3786"],
+                    [0.5555555555555556, "#d8576b"],
+                    [0.6666666666666666, "#ed7953"],
+                    [0.7777777777777778, "#fb9f3a"],
+                    [0.8888888888888888, "#fdca26"],
+                    [1.0, "#f0f921"],
+                  ],
+                },
+              ],
+              surface: [
+                {
+                  type: "surface",
+                  colorbar: { outlinewidth: 0, ticks: "" },
+                  colorscale: [
+                    [0.0, "#0d0887"],
+                    [0.1111111111111111, "#46039f"],
+                    [0.2222222222222222, "#7201a8"],
+                    [0.3333333333333333, "#9c179e"],
+                    [0.4444444444444444, "#bd3786"],
+                    [0.5555555555555556, "#d8576b"],
+                    [0.6666666666666666, "#ed7953"],
+                    [0.7777777777777778, "#fb9f3a"],
+                    [0.8888888888888888, "#fdca26"],
+                    [1.0, "#f0f921"],
+                  ],
+                },
+              ],
+              mesh3d: [
+                { type: "mesh3d", colorbar: { outlinewidth: 0, ticks: "" } },
+              ],
+              scatter: [
+                {
+                  fillpattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                  type: "scatter",
+                },
+              ],
+              parcoords: [
+                {
+                  type: "parcoords",
+                  line: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              scatterpolargl: [
+                {
+                  type: "scatterpolargl",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              bar: [
+                {
+                  error_x: { color: "#2a3f5f" },
+                  error_y: { color: "#2a3f5f" },
+                  marker: {
+                    line: { color: "#E5ECF6", width: 0.5 },
+                    pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                  },
+                  type: "bar",
+                },
+              ],
+              scattergeo: [
+                {
+                  type: "scattergeo",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              scatterpolar: [
+                {
+                  type: "scatterpolar",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              histogram: [
+                {
+                  marker: {
+                    pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                  },
+                  type: "histogram",
+                },
+              ],
+              scattergl: [
+                {
+                  type: "scattergl",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              scatter3d: [
+                {
+                  type: "scatter3d",
+                  line: { colorbar: { outlinewidth: 0, ticks: "" } },
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              scattermapbox: [
+                {
+                  type: "scattermapbox",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              scatterternary: [
+                {
+                  type: "scatterternary",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              scattercarpet: [
+                {
+                  type: "scattercarpet",
+                  marker: { colorbar: { outlinewidth: 0, ticks: "" } },
+                },
+              ],
+              carpet: [
+                {
+                  aaxis: {
+                    endlinecolor: "#2a3f5f",
+                    gridcolor: "white",
+                    linecolor: "white",
+                    minorgridcolor: "white",
+                    startlinecolor: "#2a3f5f",
+                  },
+                  baxis: {
+                    endlinecolor: "#2a3f5f",
+                    gridcolor: "white",
+                    linecolor: "white",
+                    minorgridcolor: "white",
+                    startlinecolor: "#2a3f5f",
+                  },
+                  type: "carpet",
+                },
+              ],
+              table: [
+                {
+                  cells: {
+                    fill: { color: "#EBF0F8" },
+                    line: { color: "white" },
+                  },
+                  header: {
+                    fill: { color: "#C8D4E3" },
+                    line: { color: "white" },
+                  },
+                  type: "table",
+                },
+              ],
+              barpolar: [
+                {
+                  marker: {
+                    line: { color: "#E5ECF6", width: 0.5 },
+                    pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                  },
+                  type: "barpolar",
+                },
+              ],
+              pie: [{ automargin: true, type: "pie" }],
+            },
+            layout: {
+              autotypenumbers: "strict",
+              colorway: [
+                "#636efa",
+                "#EF553B",
+                "#00cc96",
+                "#ab63fa",
+                "#FFA15A",
+                "#19d3f3",
+                "#FF6692",
+                "#B6E880",
+                "#FF97FF",
+                "#FECB52",
+              ],
+              font: { color: "#2a3f5f" },
+              hovermode: "closest",
+              hoverlabel: { align: "left" },
+              paper_bgcolor: "transparent",
+              plot_bgcolor: "#E5ECF6",
+              polar: {
+                bgcolor: "#E5ECF6",
+                angularaxis: {
                   gridcolor: "white",
                   linecolor: "white",
                   ticks: "",
-                  title: { standoff: 15 },
+                },
+                radialaxis: {
+                  gridcolor: "white",
+                  linecolor: "white",
+                  ticks: "",
+                },
+              },
+              ternary: {
+                bgcolor: "#E5ECF6",
+                aaxis: { gridcolor: "white", linecolor: "white", ticks: "" },
+                baxis: { gridcolor: "white", linecolor: "white", ticks: "" },
+                caxis: { gridcolor: "white", linecolor: "white", ticks: "" },
+              },
+              coloraxis: { colorbar: { outlinewidth: 0, ticks: "" } },
+              colorscale: {
+                sequential: [
+                  [0.0, "#0d0887"],
+                  [0.1111111111111111, "#46039f"],
+                  [0.2222222222222222, "#7201a8"],
+                  [0.3333333333333333, "#9c179e"],
+                  [0.4444444444444444, "#bd3786"],
+                  [0.5555555555555556, "#d8576b"],
+                  [0.6666666666666666, "#ed7953"],
+                  [0.7777777777777778, "#fb9f3a"],
+                  [0.8888888888888888, "#fdca26"],
+                  [1.0, "#f0f921"],
+                ],
+                sequentialminus: [
+                  [0.0, "#0d0887"],
+                  [0.1111111111111111, "#46039f"],
+                  [0.2222222222222222, "#7201a8"],
+                  [0.3333333333333333, "#9c179e"],
+                  [0.4444444444444444, "#bd3786"],
+                  [0.5555555555555556, "#d8576b"],
+                  [0.6666666666666666, "#ed7953"],
+                  [0.7777777777777778, "#fb9f3a"],
+                  [0.8888888888888888, "#fdca26"],
+                  [1.0, "#f0f921"],
+                ],
+                diverging: [
+                  [0, "#8e0152"],
+                  [0.1, "#c51b7d"],
+                  [0.2, "#de77ae"],
+                  [0.3, "#f1b6da"],
+                  [0.4, "#fde0ef"],
+                  [0.5, "#f7f7f7"],
+                  [0.6, "#e6f5d0"],
+                  [0.7, "#b8e186"],
+                  [0.8, "#7fbc41"],
+                  [0.9, "#4d9221"],
+                  [1, "#276419"],
+                ],
+              },
+              xaxis: {
+                gridcolor: "white",
+                linecolor: "white",
+                ticks: "",
+                title: { standoff: 15 },
+                zerolinecolor: "white",
+                automargin: true,
+                zerolinewidth: 2,
+              },
+              yaxis: {
+                gridcolor: "white",
+                linecolor: "white",
+                ticks: "",
+                title: { standoff: 15 },
+                zerolinecolor: "white",
+                automargin: true,
+                zerolinewidth: 2,
+              },
+              scene: {
+                xaxis: {
+                  backgroundcolor: "#E5ECF6",
+                  gridcolor: "white",
+                  linecolor: "white",
+                  showbackground: true,
+                  ticks: "",
                   zerolinecolor: "white",
-                  automargin: true,
-                  zerolinewidth: 2,
+                  gridwidth: 2,
                 },
                 yaxis: {
+                  backgroundcolor: "#E5ECF6",
                   gridcolor: "white",
                   linecolor: "white",
+                  showbackground: true,
                   ticks: "",
-                  title: { standoff: 15 },
                   zerolinecolor: "white",
-                  automargin: true,
-                  zerolinewidth: 2,
+                  gridwidth: 2,
                 },
-                scene: {
-                  xaxis: {
-                    backgroundcolor: "#E5ECF6",
-                    gridcolor: "white",
-                    linecolor: "white",
-                    showbackground: true,
-                    ticks: "",
-                    zerolinecolor: "white",
-                    gridwidth: 2,
-                  },
-                  yaxis: {
-                    backgroundcolor: "#E5ECF6",
-                    gridcolor: "white",
-                    linecolor: "white",
-                    showbackground: true,
-                    ticks: "",
-                    zerolinecolor: "white",
-                    gridwidth: 2,
-                  },
-                  zaxis: {
-                    backgroundcolor: "#E5ECF6",
-                    gridcolor: "white",
-                    linecolor: "white",
-                    showbackground: true,
-                    ticks: "",
-                    zerolinecolor: "white",
-                    gridwidth: 2,
-                  },
+                zaxis: {
+                  backgroundcolor: "#E5ECF6",
+                  gridcolor: "white",
+                  linecolor: "white",
+                  showbackground: true,
+                  ticks: "",
+                  zerolinecolor: "white",
+                  gridwidth: 2,
                 },
-                shapedefaults: { line: { color: "#2a3f5f" } },
-                annotationdefaults: {
-                  arrowcolor: "#2a3f5f",
-                  arrowhead: 0,
-                  arrowwidth: 1,
-                },
-                geo: {
-                  bgcolor: "white",
-                  landcolor: "#E5ECF6",
-                  subunitcolor: "white",
-                  showland: true,
-                  showlakes: true,
-                  lakecolor: "white",
-                },
-                title: { x: 0.05 },
-                mapbox: { style: "light" },
-                autosize: true,
-                modebar: {
-                  activecolor: "#06b6d4",
-                  color: "#aaaaaa",
-                  bgcolor: "transparent",
-                  remove: [
-                    "zoom",
-                    "zoomin",
-                    "zoomout",
-                    "autoscale",
-                    "toimage",
-                    "select",
-                    "lasso"
-                  ]
-                },
-                dragmode: "pan"
               },
-            },
-            xaxis: { 
-              showgrid: false, 
-              zeroline: false,
-              range: ["2024-02-18T15:20:00", "2024-02-18T16:59:00"],
-            },
-            yaxis: {
-              gridcolor: "grey",
-              zerolinecolor: "grey",
-              range: {{ y_range|default:"[2, 20]" }},
-              fixedrange: true,
-            },
-            shapes: [
-              {
-                fillcolor: "green",
-                line: { width: 0 },
-                opacity: 0.2,
-                type: "rect",
-                x0: 0,
-                x1: 1,
-                xref: "x domain",
-                y0: 3.9,
-                y1: 9,
-                yref: "y",
+              shapedefaults: { line: { color: "#2a3f5f" } },
+              annotationdefaults: {
+                arrowcolor: "#2a3f5f",
+                arrowhead: 0,
+                arrowwidth: 1,
               },
-            ],
+              geo: {
+                bgcolor: "white",
+                landcolor: "#E5ECF6",
+                subunitcolor: "white",
+                showland: true,
+                showlakes: true,
+                lakecolor: "white",
+              },
+              title: { x: 0.05 },
+              mapbox: { style: "light" },
+              autosize: true,
+              modebar: {
+                activecolor: "#06b6d4",
+                color: "#aaaaaa",
+                bgcolor: "transparent",
+                remove: [
+                  "zoom",
+                  "zoomin",
+                  "zoomout",
+                  "autoscale",
+                  "toimage",
+                  "select",
+                  "lasso"
+                ]
+              },
+              dragmode: "pan"
+            },
           },
-          { responsive: true }
-        );
-      }
-      resize_()
-      function resize_() {
+          xaxis: {
+            showgrid: false,
+            zeroline: false,
+            range: ["2024-02-18T15:20:00", "2024-02-18T16:59:00"],
+          },
+          yaxis: {
+            gridcolor: "grey",
+            zerolinecolor: "grey",
+            range: {{ y_range|default:"[2, 20]" }},
+            fixedrange: true,
+          },
+          shapes: [
+            {
+              fillcolor: "green",
+              line: { width: 0 },
+              opacity: 0.2,
+              type: "rect",
+              x0: 0,
+              x1: 1,
+              xref: "x domain",
+              y0: 3.9,
+              y1: 9,
+              yref: "y",
+            },
+          ],
+        },
+        { responsive: true }
+      );
+    }
+    resize_()
+    function resize_() {
+      var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
+      Plotly.Plots.resize(plot);
+    }
+    document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c").on('plotly_relayout', function(eventdata) {
+      let max_x_value = new Date("2024-02-18 16:59:00Z")
+      if (eventdata['xaxis.range[0]'] !== undefined) {
+        // Ensure that the maximum x value is not exceeded
+        var new_max_x = new Date(Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value));
         var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
-        Plotly.Plots.resize(plot);
-      }
-      document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c").on('plotly_relayout', function(eventdata) {
-        let max_x_value = new Date("2024-02-18 16:59:00Z")
-        if (eventdata['xaxis.range[0]'] !== undefined) {
-          // Ensure that the maximum x value is not exceeded
-          var new_max_x = new Date(Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value));
-          var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
 
-          // Need to update both ways for some reason.
-          plot.layout.xaxis.range[1] = new_max_x.toISOString();
-          Plotly.update(plot, {'xaxis.range[1]': ''});
-        }
-      });
-    </script>
-    <div class="border-dashed border-2 border-red-400">
-      <div class="m-2 flex-initial top-0 right-0 bg-slate-300 rounded-lg shadow p-4 aspect-square">
-        <div class="text-center text-6xl aspect-square">
-          4.1
-        </div>
-        <div>
-          <img src="{% static 'icons8-arrow-96.png' %}" class="m-auto rotate-45"/> 
-        </div>
-        <form method="post" action="{% url 'logout' %}">
-          {% csrf_token %}
-          <button type="submit">Logout</button>
-        </form>
-        <div>
-          {{ user.username }}
-          {{ user.is_authenticated }}
+        // Need to update both ways for some reason.
+        plot.layout.xaxis.range[1] = new_max_x.toISOString();
+        Plotly.update(plot, {'xaxis.range[1]': ''});
+      }
+    });
+  </script>
+  <div class="border-2 border-dashed border-red-400">
+    <div
+      class="aspect-square right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-4 shadow"
+    >
+      <div class="aspect-square text-center text-6xl">4.1</div>
+      <div>
+        <img
+          src="{% static 'icons8-arrow-96.png' %}"
+          class="m-auto rotate-45"
+        />
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

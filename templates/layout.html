@@ -1,46 +1,55 @@
-{# Base layout with navbar and page content #} 
-{% extends 'base.html' %} 
+{# Base layout with navbar and page content #} {% extends 'base.html' %} 
 {% load static %} 
-
 {% block layout %}
-<div class="flex flex-col h-screen justify-stretch bg-slate-100">
+<div class="flex h-screen flex-col justify-stretch bg-slate-100">
   <header>
-  {% block header %}
+    {% block header %}
     <div
-      class="flex items-center justify-between bg-slate-200 w-screen[-2] m-1 rounded-lg shadow"
+      class="w-screen[-2] m-1 flex items-center justify-between rounded-lg bg-slate-200 shadow"
     >
       <div class="flex items-center">
         <a href="#home">
-          <img src="{% static 'pinglu_transparent.png' %}" class="m-2 rounded-lg size-20" />
+          <img
+            src="{% static 'pinglu_transparent.png' %}"
+            class="m-2 size-20 rounded-lg"
+          />
         </a>
-        <h1 class="text-4xl text-slate-600 font-semibold">Glu.ui/Iglu</h1>
+        <h1 class="text-4xl font-semibold text-slate-600">Glu.ui/Iglu</h1>
       </div>
       <div class="flex flex-row">
-        <div
-          class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow"
-        >
-          <a
-            href="#menu-item-1"
-            class="text-slate-200 group-hover:text-slate-600 text-center align-middle"
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="group text-slate-200">
+            <div
+              class="m-1 h-8 w-32 rounded-lg bg-cyan-500 text-center align-middle shadow hover:bg-cyan-200 group-hover:text-slate-600"
+            >
+              Log out
+            </div>
+          </button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">
+          <div
+            class="m-1 h-8 w-32 rounded-lg bg-cyan-500 text-center align-middle text-slate-200 shadow hover:bg-cyan-200 hover:text-slate-600"
           >
             Log in
-          </a>
-        </div>
+          </div>
+        </a>
+        {% endif %}
       </div>
     </div>
-  {% endblock %}
+    {% endblock %}
   </header>
   <main class="flex flex-grow">
-  {% include 'navbar.html' %}
-  {% block content %}
-  {% endblock %}
+    {% include 'navbar.html' %} {% block content %} {% endblock %}
   </main>
   <footer>
-  {% block footer %}
-    <div class=" bg-slate-200 w-screen[-2] m-1 rounded-lg shadow">
+    {% block footer %}
+    <div class="w-screen[-2] m-1 rounded-lg bg-slate-200 shadow">
       {% lorem 1 b random %}
     </div>
-  {% endblock %}
+    {% endblock %}
   </footer>
 </div>
 {% endblock %}

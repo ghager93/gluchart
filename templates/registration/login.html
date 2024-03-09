@@ -1,31 +1,49 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block layout %}
-  <div class="flex flex-col h-screen justify-stretch bg-slate-100">
-    <main class="flex flex-grow place-content-center place-items-center">
-      <div class="flex gap-4 justify-center content-center">
-        <div class="flex flex-col">
-          <img src="../../static/pinglu_transparent.png" class="m-2 rounded-lg size-20" />
-          <h1 class="text-4xl text-slate-600 font-semibold">Glu.ui</h1>
-        </div>
-        <form class="flex flex-col gap-2 items-center" action="{% url 'login' %}" method="post">
-          {% csrf_token %}
-          <div class="flex flex-col min-h-20">
-            <input class="bg-cyan-50 rounded-t-lg border-2 h-1/2 focus:z-10 mb-[-2px]" id="id_username" type="text" name="username" placeholder="Username">
-            <input class="bg-cyan-50 rounded-b-lg border-2 h-1/2" id="id_password" type="password" name="password" placeholder="Password">
-          </div>
-          <div class="m-1 bg-cyan-500 rounded-lg h-8 w-full text-center group hover:bg-cyan-200 shadow">
-            <button class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
-              Log in
-            </button>
-          </div>
-          <input type="submit" value="Log in">
-        </form>
-
+{% extends 'base.html' %} {% load static %} {% block layout %}
+<div class="flex h-screen flex-col justify-stretch bg-slate-100">
+  <main class="flex flex-grow place-content-center place-items-center">
+    <div class="flex content-center justify-center gap-4">
+      <div class="flex flex-col">
+        <img
+          src="../../static/pinglu_transparent.png"
+          class="m-2 size-20 rounded-lg"
+        />
+        <h1 class="text-4xl font-semibold text-slate-600">Glu.ui</h1>
       </div>
-    </main>
-    <footer class="h-max bg-red-300 bottom-0 static">Foot!</footer>
-  </div>
+      <form
+        class="flex flex-col items-center gap-2"
+        action="{% url 'login' %}"
+        method="post"
+      >
+        {% csrf_token %}
+        <div class="flex min-h-20 flex-col">
+          <input
+            class="mb-[-2px] h-1/2 rounded-t-lg border-2 bg-cyan-50 focus:z-10"
+            id="id_username"
+            type="text"
+            name="username"
+            placeholder="Username"
+          />
+          <input
+            class="h-1/2 rounded-b-lg border-2 bg-cyan-50"
+            id="id_password"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <div
+          class="group m-1 h-8 w-full rounded-lg bg-cyan-500 text-center shadow hover:bg-cyan-200"
+        >
+          <button
+            class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+          >
+            Log in
+          </button>
+        </div>
+        <input type="submit" value="Log in" />
+      </form>
+    </div>
+  </main>
+  <footer class="static bottom-0 h-max bg-red-300">Foot!</footer>
+</div>
 {% endblock layout %}
-
-  

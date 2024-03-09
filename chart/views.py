@@ -33,6 +33,27 @@ class GlucoseValueViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = GlucoseValueFilter
 
+    def create(self, request, *args, **kwargs):
+        if isinstance(request.data, list):
+            return self.bulk_create(request, *args, **kwargs)
+        if "user" not in request.data.keys():
+            request.data["user"] = request.user.id
+        return super().create(request, *args, **kwargs)
+
+
+    def bulk_create(self, request, *args, **kwargs):
+        request_data = list(map(lambda entry: self.add_user_if_not_exist(entry, request.user.id), request.data))
+        serializer = self.get_serializer(data=request_data, many=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+    @staticmethod
+    def add_user_if_not_exist(entry, user_id):
+        if "user" not in entry.keys():
+            entry["user"] = user_id
+        return entry
 
 class GlucoseValueBatchCreate(views.APIView):
     queryset = GlucoseValue.objects.all()
@@ -85,25 +106,6 @@ class EntriesView(views.View):
     def get(self, request):
         return HttpResponse(GlucoseValue.objects.filter(time_of_reading__lt="2020-01-06T00:00:00Z").values('time_of_reading', 'value'))
     
-
-# class LoginView(views.View):
-#     template_name = 'login.html'
-
-#     def get(self, request):
-#         return render(request, self.template_name)
-    
-#     def post(self, request):
-#         print(request)
-        
-class LoginView(views.View):
-    template_name = "registration/login.html"
-    next_page = "/graph"
-
-    def get(self, request):
-        return render(request, self.template_name)
-    
-    def post(self, request):
-        print(request.POST)
 
 
 

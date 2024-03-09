@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,54 +11,88 @@
     ></script>
     <title>Glu.ui - Diabetes Management</title>
   </head>
-  <body class="flex flex-col h-screen justify-stretch bg-slate-100">
+  <body class="flex h-screen flex-col justify-stretch bg-slate-100">
     <header>
-      <div class="flex items-center justify-between bg-slate-200 w-screen[-2] m-1 rounded-lg shadow">
+      <div
+        class="w-screen[-2] m-1 flex items-center justify-between rounded-lg bg-slate-200 shadow"
+      >
         <div class="flex items-center">
           <a href="#home">
-            <img src="../../static/pinglu_transparent.png" class="m-2 rounded-lg size-20" />
+            <img
+              src="../../static/pinglu_transparent.png"
+              class="m-2 size-20 rounded-lg"
+            />
           </a>
-          <h1 class="text-4xl text-slate-600 font-semibold">
-            Glu.ui/Iglu
-          </h1>
+          <h1 class="text-4xl font-semibold text-slate-600">Glu.ui/Iglu</h1>
         </div>
         <div class="flex flex-row">
-          <div class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow">
-            <a href="#menu-item-1" class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-1"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
               Log in
             </a>
-          </div>          
-          <div class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow">
-            <a href="#menu-item-1" class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
+          </div>
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-1"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
               Sign up
             </a>
           </div>
         </div>
       </div>
     </header>
-    <main class="flex-grow flex">
-      <nav class="ml-1 mr-1 mb-1 flex-initial top-0 right-0 w-fit bg-slate-300 rounded-lg shadow">
+    <main class="flex flex-grow">
+      <nav
+        class="right-0 top-0 mb-1 ml-1 mr-1 w-fit flex-initial rounded-lg bg-slate-300 shadow"
+      >
         <div class="flex flex-col gap-4">
-          <div class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow">
-            <a href="#menu-item-1" class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-1"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
               Graph
             </a>
           </div>
-          <div class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow">
-            <a href="#menu-item-2" class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-2"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
               Table
             </a>
           </div>
-          <div class="m-1 bg-cyan-500 rounded-xl h-8 w-32 text-center group hover:bg-cyan-200 shadow">
-            <a href="#menu-item-3" class="text-slate-200 group-hover:text-slate-600 text-center align-middle">
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-3"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
               Treatments
             </a>
           </div>
         </div>
       </nav>
-      <div class="mr-1 mb-1 flex flex-grow bg-slate-200 rounded-lg shadow p-2 h-min-80 gap-2">
-        <div class="border-dashed border-2 border-red-400 flex-grow">
-          <div class="m-2 flex-initial top-0 right-0 bg-slate-300 rounded-lg shadow p-1">
+      <div
+        class="h-min-80 mb-1 mr-1 flex flex-grow gap-2 rounded-lg bg-slate-200 p-2 shadow"
+      >
+        <div class="flex-grow border-2 border-dashed border-red-400">
+          <div
+            class="right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-1 shadow"
+          >
             <div
               id="05157df0-c8a6-41fd-8480-a60e5820656c"
               class="plotly-graph-div overflow-auto"
@@ -375,60 +409,305 @@
                     "2024-02-18T16:59:00",
                   ],
                   y: [
-                    11.0, 10.45, 11.25, 11.0, 11.75, 11.35, 11.75, 12.0, 12.2,
-                    12.3, 13.05, 12.3, 12.45,
-                    11.8, 12.2, 11.65, 11.8, 11.95, 11.85, 12.6, 12.6,
-                    12.2, 12.75, 12.1, 11.85, 11.55, 10.8,
-                    11.2, 11.14, 10.7, 10.45,
-                    11.4, 11.8, 12.1, 12.75, 12.8, 12.3,
-                    12.6, 12.3, 12.45, 12.2, 12.6, 12.6,
-                    13.1, 13.85, 14.25, 15.14, 13.75, 13.8,
-                    15.0, 14.15, 15.14, 14.2, 14.25, 14.7,
-                    15.0, 14.6, 14.7, 14.6, 14.7, 13.95,
-                    13.64, 14.2, 14.7, 15.348, 15.0, 14.45,
-                    14.65, 14.08, 13.45, 12.7, 12.9, 13.2, 13.1, 13.0,
-                    13.5, 13.7, 12.7, 12.14, 11.8, 12.9,
-                    12.75, 12.9, 12.95, 12.75, 13.0, 13.1, 12.2, 12.35, 12.5, 11.8,
-                    10.95, 11.5, 11.95, 11.85, 11.6, 11.6, 10.7, 10.95,
-                    10.85, 11.0, 10.05, 9.25, 9.0, 8.4, 8.75, 8.5, 8.75, 9.1, 9.15,
-                    8.54, 8.45, 7.85, 8.45, 8.8, 9.0, 9.2,
-                    10.25, 10.3, 8.95, 8.8, 9.2, 8.85,
-                    8.25, 8.45, 8.64, 9.25, 8.95, 9.2, 9.2, 8.95,
-                    8.8, 10.1, 10.25, 11.04,
-                    10.64, 10.4, 10.35, 10.0, 9.25, 9.05, 8.75,
-                    7.85, 8.6, 8.6, 8.8,
-                    7.94, 7.94, 7.85, 7.75,
-                    7.94, 7.5, 7.44, 6.85, 7.05, 6.75, 7.5,
-                    6.85, 6.04, 5.4, 5.6,
-                    5.6, 5.145, 5.64,
-                    6.94, 7.35, 7.8, 8.64,
-                    8.95, 9.2, 9.85, 10.05, 9.7, 9.6,
-                    9.45, 9.2, 9.2, 8.04, 7.85,
-                    8.04, 7.6, 8.7, 9.5, 9.54, 9.0, 8.85,
-                    9.1, 8.45, 8.04, 9.0, 8.5, 8.54, 8.25,
-                    8.4, 8.4, 7.6, 7.05, 6.44, 6.145,
-                    6.645, 7.05, 6.645, 7.1,
-                    7.35, 6.7, 6.25, 6.5, 6.75,
-                    6.1, 5.6, 5.,
-                    6.645, 7.145, 6.85, 6.5,
-                    6.25, 5.05, 5.45, 5.64, 5.85, 5.94, 5.3,
-                    5.74, 5.45, 5.85, 5.6, 6.25,
-                    5.7, 5.94, 5.145, 4.85,
-                    5.1, 5.145, 4.6, 4.0,
-                    5.1, 5.35, 5.35, 4.85, 5.05,
-                    4.54, 4.0, 4.1, 4.74, 5.55,
-                    5.64, 5.4, 5.1, 4.94, 5.35,
-                    5.145, 6.1, 5.6, 5.5,
-                    5.6, 4.85, 4.645, 4.645,
-                    4.3, 4.44, 5.05, 5.6,
-                    5.6, 5.6, 5.3, 5.1,
-                    4.54, 4.15, 4.6, 4.94,
-                    5.45, 5.6, 5.55, 5.94,
-                    5.64, 5.55, 4.6, 4.25, 4.35, 4.85,
-                    4.85, 4.4, 4.1, 4.05,
-                    4.44, 4.25, 4.3, 3.947,
-                    4.6, 4.85, 4.25, 4.0, 4.05, 3.0, 3.443,
-                    4.05, 3.56, "null", 3.645,
+                    11.0,
+                    10.45,
+                    11.25,
+                    11.0,
+                    11.75,
+                    11.35,
+                    11.75,
+                    12.0,
+                    12.2,
+                    12.3,
+                    13.05,
+                    12.3,
+                    12.45,
+                    11.8,
+                    12.2,
+                    11.65,
+                    11.8,
+                    11.95,
+                    11.85,
+                    12.6,
+                    12.6,
+                    12.2,
+                    12.75,
+                    12.1,
+                    11.85,
+                    11.55,
+                    10.8,
+                    11.2,
+                    11.14,
+                    10.7,
+                    10.45,
+                    11.4,
+                    11.8,
+                    12.1,
+                    12.75,
+                    12.8,
+                    12.3,
+                    12.6,
+                    12.3,
+                    12.45,
+                    12.2,
+                    12.6,
+                    12.6,
+                    13.1,
+                    13.85,
+                    14.25,
+                    15.14,
+                    13.75,
+                    13.8,
+                    15.0,
+                    14.15,
+                    15.14,
+                    14.2,
+                    14.25,
+                    14.7,
+                    15.0,
+                    14.6,
+                    14.7,
+                    14.6,
+                    14.7,
+                    13.95,
+                    13.64,
+                    14.2,
+                    14.7,
+                    15.348,
+                    15.0,
+                    14.45,
+                    14.65,
+                    14.08,
+                    13.45,
+                    12.7,
+                    12.9,
+                    13.2,
+                    13.1,
+                    13.0,
+                    13.5,
+                    13.7,
+                    12.7,
+                    12.14,
+                    11.8,
+                    12.9,
+                    12.75,
+                    12.9,
+                    12.95,
+                    12.75,
+                    13.0,
+                    13.1,
+                    12.2,
+                    12.35,
+                    12.5,
+                    11.8,
+                    10.95,
+                    11.5,
+                    11.95,
+                    11.85,
+                    11.6,
+                    11.6,
+                    10.7,
+                    10.95,
+                    10.85,
+                    11.0,
+                    10.05,
+                    9.25,
+                    9.0,
+                    8.4,
+                    8.75,
+                    8.5,
+                    8.75,
+                    9.1,
+                    9.15,
+                    8.54,
+                    8.45,
+                    7.85,
+                    8.45,
+                    8.8,
+                    9.0,
+                    9.2,
+                    10.25,
+                    10.3,
+                    8.95,
+                    8.8,
+                    9.2,
+                    8.85,
+                    8.25,
+                    8.45,
+                    8.64,
+                    9.25,
+                    8.95,
+                    9.2,
+                    9.2,
+                    8.95,
+                    8.8,
+                    10.1,
+                    10.25,
+                    11.04,
+                    10.64,
+                    10.4,
+                    10.35,
+                    10.0,
+                    9.25,
+                    9.05,
+                    8.75,
+                    7.85,
+                    8.6,
+                    8.6,
+                    8.8,
+                    7.94,
+                    7.94,
+                    7.85,
+                    7.75,
+                    7.94,
+                    7.5,
+                    7.44,
+                    6.85,
+                    7.05,
+                    6.75,
+                    7.5,
+                    6.85,
+                    6.04,
+                    5.4,
+                    5.6,
+                    5.6,
+                    5.145,
+                    5.64,
+                    6.94,
+                    7.35,
+                    7.8,
+                    8.64,
+                    8.95,
+                    9.2,
+                    9.85,
+                    10.05,
+                    9.7,
+                    9.6,
+                    9.45,
+                    9.2,
+                    9.2,
+                    8.04,
+                    7.85,
+                    8.04,
+                    7.6,
+                    8.7,
+                    9.5,
+                    9.54,
+                    9.0,
+                    8.85,
+                    9.1,
+                    8.45,
+                    8.04,
+                    9.0,
+                    8.5,
+                    8.54,
+                    8.25,
+                    8.4,
+                    8.4,
+                    7.6,
+                    7.05,
+                    6.44,
+                    6.145,
+                    6.645,
+                    7.05,
+                    6.645,
+                    7.1,
+                    7.35,
+                    6.7,
+                    6.25,
+                    6.5,
+                    6.75,
+                    6.1,
+                    5.6,
+                    5,
+                    6.645,
+                    7.145,
+                    6.85,
+                    6.5,
+                    6.25,
+                    5.05,
+                    5.45,
+                    5.64,
+                    5.85,
+                    5.94,
+                    5.3,
+                    5.74,
+                    5.45,
+                    5.85,
+                    5.6,
+                    6.25,
+                    5.7,
+                    5.94,
+                    5.145,
+                    4.85,
+                    5.1,
+                    5.145,
+                    4.6,
+                    4.0,
+                    5.1,
+                    5.35,
+                    5.35,
+                    4.85,
+                    5.05,
+                    4.54,
+                    4.0,
+                    4.1,
+                    4.74,
+                    5.55,
+                    5.64,
+                    5.4,
+                    5.1,
+                    4.94,
+                    5.35,
+                    5.145,
+                    6.1,
+                    5.6,
+                    5.5,
+                    5.6,
+                    4.85,
+                    4.645,
+                    4.645,
+                    4.3,
+                    4.44,
+                    5.05,
+                    5.6,
+                    5.6,
+                    5.6,
+                    5.3,
+                    5.1,
+                    4.54,
+                    4.15,
+                    4.6,
+                    4.94,
+                    5.45,
+                    5.6,
+                    5.55,
+                    5.94,
+                    5.64,
+                    5.55,
+                    4.6,
+                    4.25,
+                    4.35,
+                    4.85,
+                    4.85,
+                    4.4,
+                    4.1,
+                    4.05,
+                    4.44,
+                    4.25,
+                    4.3,
+                    3.947,
+                    4.6,
+                    4.85,
+                    4.25,
+                    4.0,
+                    4.05,
+                    3.0,
+                    3.443,
+                    4.05,
+                    3.56,
+                    "null",
+                    3.645,
                     4.1,
                   ],
                   type: "scatter",
@@ -558,11 +837,18 @@
                       },
                     ],
                     mesh3d: [
-                      { type: "mesh3d", colorbar: { outlinewidth: 0, ticks: "" } },
+                      {
+                        type: "mesh3d",
+                        colorbar: { outlinewidth: 0, ticks: "" },
+                      },
                     ],
                     scatter: [
                       {
-                        fillpattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                        fillpattern: {
+                          fillmode: "overlay",
+                          size: 10,
+                          solidity: 0.2,
+                        },
                         type: "scatter",
                       },
                     ],
@@ -584,7 +870,11 @@
                         error_y: { color: "#2a3f5f" },
                         marker: {
                           line: { color: "#E5ECF6", width: 0.5 },
-                          pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                          pattern: {
+                            fillmode: "overlay",
+                            size: 10,
+                            solidity: 0.2,
+                          },
                         },
                         type: "bar",
                       },
@@ -604,7 +894,11 @@
                     histogram: [
                       {
                         marker: {
-                          pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                          pattern: {
+                            fillmode: "overlay",
+                            size: 10,
+                            solidity: 0.2,
+                          },
                         },
                         type: "histogram",
                       },
@@ -676,7 +970,11 @@
                       {
                         marker: {
                           line: { color: "#E5ECF6", width: 0.5 },
-                          pattern: { fillmode: "overlay", size: 10, solidity: 0.2 },
+                          pattern: {
+                            fillmode: "overlay",
+                            size: 10,
+                            solidity: 0.2,
+                          },
                         },
                         type: "barpolar",
                       },
@@ -717,9 +1015,21 @@
                     },
                     ternary: {
                       bgcolor: "#E5ECF6",
-                      aaxis: { gridcolor: "white", linecolor: "white", ticks: "" },
-                      baxis: { gridcolor: "white", linecolor: "white", ticks: "" },
-                      caxis: { gridcolor: "white", linecolor: "white", ticks: "" },
+                      aaxis: {
+                        gridcolor: "white",
+                        linecolor: "white",
+                        ticks: "",
+                      },
+                      baxis: {
+                        gridcolor: "white",
+                        linecolor: "white",
+                        ticks: "",
+                      },
+                      caxis: {
+                        gridcolor: "white",
+                        linecolor: "white",
+                        ticks: "",
+                      },
                     },
                     coloraxis: { colorbar: { outlinewidth: 0, ticks: "" } },
                     colorscale: {
@@ -834,14 +1144,14 @@
                         "zoomin",
                         "zoomout",
                         "autoscale",
-                        "toimage"
-                      ]
+                        "toimage",
+                      ],
                     },
-                    dragmode: "pan"
+                    dragmode: "pan",
                   },
                 },
-                xaxis: { 
-                  showgrid: false, 
+                xaxis: {
+                  showgrid: false,
                   zeroline: false,
                   range: ["2024-02-18T15:20:00", "2024-02-18T16:59:00"],
                 },
@@ -866,39 +1176,53 @@
                   },
                 ],
               },
-              { responsive: true }
+              { responsive: true },
             );
           }
-          resize_()
+          resize_();
           function resize_() {
-            var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
+            var plot = document.getElementById(
+              "05157df0-c8a6-41fd-8480-a60e5820656c",
+            );
             Plotly.Plots.resize(plot);
           }
-          document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c").on('plotly_relayout', function(eventdata) {
-            let max_x_value = new Date("2024-02-18 16:59:00Z")
-            if (eventdata['xaxis.range[0]'] !== undefined) {
-              // Ensure that the maximum x value is not exceeded
-              var new_max_x = new Date(Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value));
-              var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
+          document
+            .getElementById("05157df0-c8a6-41fd-8480-a60e5820656c")
+            .on("plotly_relayout", function (eventdata) {
+              let max_x_value = new Date("2024-02-18 16:59:00Z");
+              if (eventdata["xaxis.range[0]"] !== undefined) {
+                // Ensure that the maximum x value is not exceeded
+                var new_max_x = new Date(
+                  Math.min(
+                    new Date(eventdata["xaxis.range[1]"] + "Z"),
+                    max_x_value,
+                  ),
+                );
+                var plot = document.getElementById(
+                  "05157df0-c8a6-41fd-8480-a60e5820656c",
+                );
 
-              // Need to update both ways for some reason.
-              plot.layout.xaxis.range[1] = new_max_x.toISOString();
-              Plotly.update(plot, {'xaxis.range[1]': ''});
-            }
-          });
+                // Need to update both ways for some reason.
+                plot.layout.xaxis.range[1] = new_max_x.toISOString();
+                Plotly.update(plot, { "xaxis.range[1]": "" });
+              }
+            });
         </script>
-        <div class="border-dashed border-2 border-red-400">
-          <div class="m-2 flex-initial top-0 right-0 bg-slate-300 rounded-lg shadow p-4 aspect-square">
-            <div class="text-center text-6xl aspect-square">
-              4.1
-            </div>
+        <div class="border-2 border-dashed border-red-400">
+          <div
+            class="aspect-square right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-4 shadow"
+          >
+            <div class="aspect-square text-center text-6xl">4.1</div>
             <div>
-              <img src="../../static/icons8-arrow-96.png" class="m-auto rotate-45"/> 
+              <img
+                src="../../static/icons8-arrow-96.png"
+                class="m-auto rotate-45"
+              />
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer class="h-max bg-red-300 bottom-0 static">Foot!</footer>
+    <footer class="static bottom-0 h-max bg-red-300">Foot!</footer>
   </body>
 </html>

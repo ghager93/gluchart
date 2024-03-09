@@ -28,4 +28,9 @@ class GlucoseValue(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', 'time_of_reading'])
+        ]
+
 
