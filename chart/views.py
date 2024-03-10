@@ -1,5 +1,6 @@
 import csv
 from io import TextIOWrapper
+from datetime import timedelta
 
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
@@ -93,12 +94,14 @@ class GraphView(views.View):
     template_name = 'graph.html'
 
     def get(self, request):
-        x_values = list(range(10))
-        y_values = [x**2/10 + 5 for x in x_values]
-        y_values[3] = None
+        values = GlucoseValue.objects.filter(user=request.user.id).order_by("-time_of_reading")[:400]
+        timestamps = [value.time_of_reading.isoformat() for value in values]
+        readings = [float(value.value) for value in values]
         return render(request, self.template_name, {
-            "x_values": f"{x_values}",
-            "y_values": f"{y_values}".replace("None", "")
+            "x_values": f"{timestamps}",
+            "y_values": f"{readings}".replace("None", "").replace("\'", "").replace("\"", ""),
+            "x_range_min": (values[0].time_of_reading - timedelta(hours=2)).isoformat(), 
+            "x_range_max": values[0].time_of_reading.isoformat()
         })
     
 

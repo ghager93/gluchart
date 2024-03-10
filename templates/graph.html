@@ -19,8 +19,8 @@
         "05157df0-c8a6-41fd-8480-a60e5820656c",
         [
           {
-            x: {{ x_values|default:"[0, 1, 2]" }},
-            y: {{ y_values|default:"[5, 7, 11]" }},
+            x: {{ x_values|default:"[0, 1, 2]" |safe }},
+            y: {{ y_values|default:"[5, 7, 11]"|safe }},
             type: "scatter",
           },
         ],
@@ -435,7 +435,10 @@
           xaxis: {
             showgrid: false,
             zeroline: false,
-            range: ["2024-02-18T15:20:00", "2024-02-18T16:59:00"],
+            range: [
+              "{{ x_range_min|default:"2024-02-18T15:20:00"|safe }}", 
+              "{{ x_range_max|default:"2024-02-18T16:59:00"|safe }}"
+            ]
           },
           yaxis: {
             gridcolor: "grey",
@@ -467,11 +470,11 @@
       Plotly.Plots.resize(plot);
     }
     document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c").on('plotly_relayout', function(eventdata) {
-      let max_x_value = new Date("2024-02-18 16:59:00Z")
+      let max_x_value = new Date("{{ x_range_max|default:"2024-02-18T16:59:00"|safe }}")
       if (eventdata['xaxis.range[0]'] !== undefined) {
+        var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
         // Ensure that the maximum x value is not exceeded
         var new_max_x = new Date(Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value));
-        var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
 
         // Need to update both ways for some reason.
         plot.layout.xaxis.range[1] = new_max_x.toISOString();
