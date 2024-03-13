@@ -473,12 +473,18 @@
       let max_x_value = new Date("{{ x_range_max|default:"2024-02-18T16:59:00"|safe }}")
       if (eventdata['xaxis.range[0]'] !== undefined) {
         var plot = document.getElementById("05157df0-c8a6-41fd-8480-a60e5820656c");
+    
         // Ensure that the maximum x value is not exceeded
-        var new_max_x = new Date(Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value));
-
-        // Need to update both ways for some reason.
-        plot.layout.xaxis.range[1] = new_max_x.toISOString();
-        Plotly.update(plot, {'xaxis.range[1]': ''});
+        if (Math.min(new Date(eventdata['xaxis.range[1]'] + 'Z'), max_x_value) === max_x_value.valueOf()) {
+          var new_min_x = new Date(max_x_value);
+          // TODO: Set x range to a variable
+          new_min_x.setHours(max_x_value.getHours() - 2);
+          
+          // Need to update both ways for some reason.
+          plot.layout.xaxis.range[0] = new_min_x.toISOString();
+          plot.layout.xaxis.range[1] = max_x_value.toISOString();
+          Plotly.update(plot, {'xaxis.range[0]': '', 'xaxis.range[1]': ''})
+        }
       }
     });
   </script>
@@ -486,11 +492,11 @@
     <div
       class="aspect-square right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-4 shadow"
     >
-      <div class="aspect-square text-center text-6xl">4.1</div>
+      <div class="aspect-square text-center text-6xl">{{ last_reading }}</div>
       <div>
         <img
           src="{% static 'icons8-arrow-96.png' %}"
-          class="m-auto rotate-45"
+          class="m-auto rotate-12"
         />
       </div>
     </div>
