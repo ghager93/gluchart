@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../static/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script
+      src="https://cdn.plot.ly/plotly-latest.min.js"
+      charset="utf-8"
+    ></script>
+    <title>Glu.ui - Diabetes Management</title>
+  </head>
+  <body class="flex h-screen flex-col justify-stretch bg-slate-100">
+    <header>
+      <div
+        class="w-screen[-2] m-1 flex items-center justify-between rounded-lg bg-slate-200 shadow"
+      >
+        <div class="flex items-center">
+          <a href="#home">
+            <img
+              src="../../static/pinglu_transparent.png"
+              class="m-2 size-20 rounded-lg"
+            />
+          </a>
+          <h1 class="text-4xl font-semibold text-slate-600">Glu.ui/Iglu</h1>
+        </div>
+        <div class="flex flex-row">
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-1"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
+              Log in
+            </a>
+          </div>
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-1"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
+              Sign up
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex flex-grow">
+      <nav
+        class="right-0 top-0 mb-1 ml-1 mr-1 w-fit flex-initial rounded-lg bg-slate-300 shadow"
+      >
+        <div class="flex flex-col gap-4">
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-1"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
+              Graph
+            </a>
+          </div>
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-2"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
+              Table
+            </a>
+          </div>
+          <div
+            class="group m-1 h-8 w-32 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+              href="#menu-item-3"
+              class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
+              Treatments
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="h-min-80 mb-1 mr-1 flex flex-grow gap-2 rounded-lg bg-slate-200 p-2 shadow"
+      >
+        <div class="border-2 border-dashed border-red-400">
+          <div
+            class="aspect-square right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-4 shadow"
+          >
+            <table>
+              <tr>
+                <th>Source</th>
+                <th>Type</th>
+                <th>Added</th>
+              </tr>
+              <tr>
+                <td>patient-id?</td>
+                <td>LibreLinkUp</td>
+                <td>2024-03-17 23:04:00</td>
+              </tr>
+              <tr>
+                <td>patient-id2</td>
+                <td>Other</td>
+                <td>2024-03-17 23:22:00</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            class="group m-1 h-8 rounded-xl bg-cyan-500 text-center shadow hover:bg-cyan-200"
+          >
+            <a
+            href="#menu-item-1"
+            class="text-center align-middle text-slate-200 group-hover:text-slate-600"
+            >
+              Add New Data Source
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="static bottom-0 h-max bg-red-300">Foot!</footer>
+  </body>
+</html>

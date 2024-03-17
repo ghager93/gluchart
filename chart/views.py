@@ -114,6 +114,15 @@ class GraphView(views.View):
         })
     
 
+class DataSourceView(views.View):
+    template_name = 'data_sources.html'
+    def get(self, request):
+        sources = Source.objects.all().order_by("created_at")
+
+        return render(request, self.template_name, {
+            "sources": sources
+        })
+
 class EntriesView(views.View):
     def get(self, request):
         return HttpResponse(GlucoseValue.objects.filter(time_of_reading__lt="2020-01-06T00:00:00Z").values('time_of_reading', 'value'))
