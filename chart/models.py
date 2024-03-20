@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Source(models.Model):
@@ -8,14 +9,21 @@ class Source(models.Model):
     api_key = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     # Returns a default source for use as foreign key
     @classmethod
     def get_default_pk(cls):
+        try:
+            default_user = User.objects.get(username="admin")
+        except ObjectDoesNotExist:
+            default_user = User.objects.filter(is_superuser=True).first()
+        
         source, _ = cls.objects.get_or_create(
             name='NO_SOURCE',
             type='',
-            api_key=''
+            api_key='',
+            user=default_user
         )
         return source
 

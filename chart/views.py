@@ -117,7 +117,7 @@ class GraphView(views.View):
 class DataSourceView(views.View):
     template_name = 'data_sources.html'
     def get(self, request):
-        sources = Source.objects.all().order_by("created_at")
+        sources = Source.objects.filter(user=request.user).order_by("created_at")
 
         return render(request, self.template_name, {
             "sources": sources
