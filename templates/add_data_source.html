@@ -6,26 +6,13 @@
     <div
       class="right-0 top-0 m-2 flex-initial rounded-lg bg-slate-300 p-1 shadow"
     >
-      {% if sources %}
-      <table>
-        <tr>
-          <th>Source</th>
-          <th>Type</th>
-          <th>Added</th>
-        </tr>
-        {% for source in sources %}
-        <tr>
-          <td>{{ source.name }}</td>
-          <td>{{ source.type }}</td>
-          <td>{{ source.created_at }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      {% else %}
-      <div>No data sources</div>
-      {% endif %}
+      <form action="/test" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Add">
+      </form>
     </div>
-    <a href="{% url 'add_data_source' %}">
+    <a href="{% url 'data_sources' %}">
       <div
         class="m-1 h-8 w-32 rounded-lg bg-cyan-500 text-center align-middle text-slate-200 shadow hover:bg-cyan-200 hover:text-slate-600"
       >

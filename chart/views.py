@@ -13,6 +13,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Source, GlucoseValue
 from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer
 from .filters import GlucoseValueFilter, SourceFilter
+from .forms import AddSourceForm
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -123,6 +124,15 @@ class DataSourceView(views.View):
             "sources": sources
         })
 
+
+class AddDataSourceView(views.View):
+    template_name = 'add_data_source.html'
+    def get(self, request):
+        form = AddSourceForm(request.POST)
+        return render(request, self.template_name, {
+            "form": form
+        })
+    
 class EntriesView(views.View):
     def get(self, request):
         return HttpResponse(GlucoseValue.objects.filter(time_of_reading__lt="2020-01-06T00:00:00Z").values('time_of_reading', 'value'))
