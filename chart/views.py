@@ -3,9 +3,8 @@ import math
 from io import TextIOWrapper
 from datetime import timedelta
 
-from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render
-from django.contrib.auth.views import LoginView
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets, views, response, status
 from django_filters.rest_framework import DjangoFilterBackend
@@ -13,7 +12,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Source, GlucoseValue
 from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer
 from .filters import GlucoseValueFilter, SourceFilter
-from .forms import AddSourceForm
+from .forms import AddSourceForm, SourceForm
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -128,10 +127,18 @@ class DataSourceView(views.View):
 class AddDataSourceView(views.View):
     template_name = 'add_data_source.html'
     def get(self, request):
-        form = AddSourceForm(request.POST)
+        # form = AddSourceForm()
+        form = SourceForm()
         return render(request, self.template_name, {
             "form": form
         })
+    
+    def post(self, request):
+        form = AddSourceForm(request.POST)
+        if form.is_valid():
+
+            return redirect("data_sources")
+    
     
 class EntriesView(views.View):
     def get(self, request):
