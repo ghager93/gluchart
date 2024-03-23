@@ -9,10 +9,11 @@ from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets, views, response, status
 from django_filters.rest_framework import DjangoFilterBackend
 
+from . import librelinkup
 from .models import Source, GlucoseValue
 from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer
 from .filters import GlucoseValueFilter, SourceFilter
-from .forms import AddSourceForm, SourceForm
+from .forms import LibreLinkUp
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -127,16 +128,21 @@ class DataSourceView(views.View):
 class AddDataSourceView(views.View):
     template_name = 'add_data_source.html'
     def get(self, request):
-        # form = AddSourceForm()
-        form = SourceForm()
+        form = LibreLinkUp()
         return render(request, self.template_name, {
             "form": form
         })
     
     def post(self, request):
-        form = AddSourceForm(request.POST)
+        form = LibreLinkUp(request.POST)
         if form.is_valid():
-
+            token, token_expiry = librelinkup.get_token(form.cleaned_data["email"], form.cleaned_data["password"])
+            patient_id = librelinkup.get_patient_id(token)
+            sensor_start, graph_data = librelinkup.get_device_info(token, patient_id)
+            print(graph_data)
+            # source = form.save(commit=False)
+            # source.user = request.user
+            # source.save()
             return redirect("data_sources")
     
     
