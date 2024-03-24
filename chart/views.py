@@ -143,7 +143,7 @@ class AddDataSourceView(views.View):
             # source = form.save(commit=False)
             # source.user = request.user
             # source.save()
-            return redirect("data_sources")
+            return render(request, "data_source_found.html")
     
     
 class EntriesView(views.View):

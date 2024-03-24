@@ -25,13 +25,19 @@
       <div>No data sources</div>
       {% endif %}
     </div>
-    <a href="{% url 'add_data_source' %}">
+    {% comment %} <a href="{% url 'add_data_source' %}">
       <div
         class="m-1 h-8 w-32 rounded-lg bg-cyan-500 text-center align-middle text-slate-200 shadow hover:bg-cyan-200 hover:text-slate-600"
       >
         Add Data Source
       </div>
-    </a>   
+    </a>    {% endcomment %}
+    <a
+      class="m-1 p-2 h-8 w-auto rounded-lg bg-cyan-500 text-center align-middle text-slate-200 shadow hover:bg-cyan-200 hover:text-slate-600"
+      href="{% url 'add_data_source' %}"
+    >
+      Add Data Source
+    </a>    
   </div>
 </div>
 {% endblock %}
