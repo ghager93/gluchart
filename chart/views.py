@@ -6,6 +6,7 @@ from datetime import timedelta
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from rest_framework import permissions, viewsets, views, response, status
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -14,6 +15,7 @@ from .models import Source, GlucoseValue
 from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer
 from .filters import GlucoseValueFilter, SourceFilter
 from .forms import LibreLinkUp
+from .utils import round_timestamp
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -30,7 +32,7 @@ class SourceViewSet(viewsets.ModelViewSet):
     filterset_class = SourceFilter
 
 class GlucoseValueViewSet(viewsets.ModelViewSet):
-    queryset = GlucoseValue.objects.all().order_by('time_of_reading')
+    queryset = GlucoseValue.objects.all().order_by('timestamp')
     serializer_class = GlucoseValueSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
@@ -139,11 +141,28 @@ class AddDataSourceView(views.View):
             token, token_expiry = librelinkup.get_token(form.cleaned_data["email"], form.cleaned_data["password"])
             patient_id = librelinkup.get_patient_id(token)
             sensor_start, graph_data = librelinkup.get_device_info(token, patient_id)
-            print(graph_data)
-            # source = form.save(commit=False)
-            # source.user = request.user
-            # source.save()
+
+            cache_data = {
+                "token": token,
+                "token_expiry": token_expiry,
+                "patient_id": patient_id,
+                "sensor_start": sensor_start,
+                "graph_data": graph_data,
+            }
+
+            cache_key = f"new_source_{request.session.session_key}"
+            cache.set(cache_key, cache_data, timeout=3600)
+            
             return render(request, "data_source_found.html")
+        
+
+def save_source(request):
+    cache_key = f"new_source_{request.session.session_key}"
+    data = cache.get(cache_key)
+
+    source = Source(name="")
+    if request.data["add_historical"] == "True":
+
     
     
 class EntriesView(views.View):

@@ -13,6 +13,8 @@ django-rest-framework = "^0.1.0"
 psycopg = "^3.1.17"
 django-filter = "^23.5"
 pyjwt = "^2.8.0"
+django-extensions = "^3.2.3"
+bpython = "^0.24"
 
 
 [build-system]

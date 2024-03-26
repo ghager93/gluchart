@@ -20,4 +20,5 @@ migrate:
 shell:
 	$(POETRY) run $(PYTHON) manage.py shell
 
-
+shell_plus:
+	$(POETRY) run $(PYTHON) manage.py shell_plus
