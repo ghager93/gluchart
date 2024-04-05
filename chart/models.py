@@ -9,7 +9,12 @@ from django.db.models.functions import TruncMinute
 class Source(models.Model):
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
-    api_key = models.CharField(max_length=200)
+    token = models.CharField(max_length=500)
+    token_expiry = models.DateTimeField()
+    email = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    patient_id = models.CharField(max_length=50)
+    sensor_start = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -42,10 +47,11 @@ class GlucoseValue(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.timestamp = TruncMinute('time_of_reading', tzinfo=self.time_of_reading.tzinfo)
+            self.timestamp = self.time_of_reading.replace(second=0)
             try:
                 existing_instance = GlucoseValue.objects.get(user=self.user, timestamp=self.timestamp)
                 self.pk = existing_instance.pk
+                self.created_at = existing_instance.created_at
             except GlucoseValue.DoesNotExist:
                 pass
         super().save(*args, **kwargs)

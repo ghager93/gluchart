@@ -1,7 +1,7 @@
 import csv
 import math
 from io import TextIOWrapper
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -45,14 +45,16 @@ class GlucoseValueViewSet(viewsets.ModelViewSet):
             request.data["user"] = request.user.id
         return super().create(request, *args, **kwargs)
 
-
     def bulk_create(self, request, *args, **kwargs):
         request_data = list(map(lambda entry: self.add_user_if_not_exist(entry, request.user.id), request.data))
-        serializer = self.get_serializer(data=request_data, many=True)
+        return self.do_bulk_create(request_data)
+    
+    def do_bulk_create(self, data):
+        serializer = self.get_serializer(data=data, many=True)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)        
     
     @staticmethod
     def add_user_if_not_exist(entry, user_id):
@@ -143,8 +145,11 @@ class AddDataSourceView(views.View):
             sensor_start, graph_data = librelinkup.get_device_info(token, patient_id)
 
             cache_data = {
+                "name": form.cleaned_data["name"],
                 "token": token,
                 "token_expiry": token_expiry,
+                "email": form.cleaned_data["email"],
+                "password": form.cleaned_data["password"],
                 "patient_id": patient_id,
                 "sensor_start": sensor_start,
                 "graph_data": graph_data,
@@ -156,14 +161,39 @@ class AddDataSourceView(views.View):
             return render(request, "data_source_found.html")
         
 
-def save_source(request):
+def add_new_source(request):
     cache_key = f"new_source_{request.session.session_key}"
     data = cache.get(cache_key)
 
-    source = Source(name="")
-    if request.data["add_historical"] == "True":
+    new_source = Source(
+        name=data["name"],
+        type="libre_link_up",
+        token=data["token"],
+        token_expiry=datetime.fromtimestamp(int(data["token_expiry"])),
+        email=data["email"],
+        password=data["password"],
+        patient_id=data["patient_id"],
+        sensor_start=datetime.fromtimestamp(int(data["sensor_start"])),
+        user=User.objects.get(id=request.user.id)
+    )
+    new_source.save()
 
-    
+    values = []
+    for entry in data["graph_data"]:
+        entry["user"] = User.objects.get(id=request.user.id)
+        entry["source"] = new_source
+        entry["time_of_reading"] = _llu_datetime(entry["timestamp"])
+        value = GlucoseValue(**entry)
+        value.save()
+        values.append(value)
+
+    return redirect("graph")
+
+
+
+def _llu_datetime(timestamp):
+    return datetime.strptime(timestamp, "%m/%d/%Y %I:%M:%S %p")
+
     
 class EntriesView(views.View):
     def get(self, request):

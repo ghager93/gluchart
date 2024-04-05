@@ -14,7 +14,7 @@ class SourceForm(forms.ModelForm):
         ]
     class Meta:
         model = Source
-        fields = ["name", "type", "api_key"]
+        fields = ["name", "type", "token"]
 
 
 class LibreLinkUp(forms.Form):

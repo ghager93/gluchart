@@ -33,6 +33,7 @@ urlpatterns = [
     path('graph', views.GraphView.as_view(), name='graph'),
     path('data_sources', views.DataSourceView.as_view(), name='data_sources'),
     path('data_sources/add', views.AddDataSourceView.as_view(), name='add_data_source'),
+    path('data_sources/add/2', views.add_new_source, name='add_data_source2'),
     path('entries', views.EntriesView.as_view(), name='entries')
 ]
 
