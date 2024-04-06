@@ -3,8 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models.functions import TruncMinute
-
+from django.db.models import constraints
 
 class Source(models.Model):
     name = models.CharField(max_length=50)
@@ -34,6 +33,11 @@ class Source(models.Model):
             user=default_user
         )
         return source
+    
+    class Meta:
+        constraints = [
+            constraints.UniqueConstraint(fields=['type', 'patient_id'], name='unique_source')
+        ]
 
 
 class GlucoseValue(models.Model):
