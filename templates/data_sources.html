@@ -1,4 +1,6 @@
-{% extends 'layout.html' %} {% load static %} {% block content %}
+{% extends 'layout.html' %}
+{% load static %} 
+{% block content %}
 <div
   class="h-min-80 mb-1 mr-1 flex flex-grow gap-2 rounded-lg bg-slate-200 p-2 shadow"
 >
@@ -18,6 +20,17 @@
           <td>{{ source.name }}</td>
           <td>{{ source.type }}</td>
           <td>{{ source.created_at }}</td>
+          <td>
+            <button 
+              hx-confirm="Delete source?" 
+              hx-delete="/sources/{{ source.id }}"
+              hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "X-Requested-With": "XMLHttpRequest"}'
+              hx-target="closest tr"
+              hx-swap="outerHTML swap:1s"
+            >  
+              Delete
+            </button>
+          </td>
         </tr>
         {% endfor %}
       </table>

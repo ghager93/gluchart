@@ -45,6 +45,8 @@ def get_device_info(token, patient_id):
     }
     url = f"{LINK_UP_CONNECTIONS_URL}/{patient_id}/graph"
     response = requests.get(url, headers=headers)
+    if response.status_code > 399:
+        return None
     sensor_start_epoch = response.json()["data"]["connection"]["sensor"]["a"]
     graph_data = [{
             "timestamp": datum["Timestamp"], 

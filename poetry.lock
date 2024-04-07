@@ -285,6 +285,21 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-htmx"
+version = "1.17.3"
+description = "Extensions for using Django with htmx."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-htmx-1.17.3.tar.gz", hash = "sha256:a2069219920d7ef0883ddbf5e8d931069db145a0d4a8a032a2708f840c7a68a6"},
+    {file = "django_htmx-1.17.3-py3-none-any.whl", hash = "sha256:0de964ca257eda2a4ebeeaa8181320119378fa5f95a2fc2f2bfbdd35034ed424"},
+]
+
+[package.dependencies]
+asgiref = ">=3.6"
+Django = ">=3.2"
+
+[[package]]
 name = "django-rest-framework"
 version = "0.1.0"
 description = "alias."
@@ -586,4 +601,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "31358f4e7e2fc22747ba5ef52854dfc8aa5de5dc738d27bdf2f4480760b6e68b"
+content-hash = "5e6380a56f955a125b117a5b87d227d03f8340f2ad683c8e80bdbff64b7d8ff8"

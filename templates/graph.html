@@ -1,4 +1,8 @@
 {% extends 'layout.html' %} {% load static %} {% block content %}
+<script
+      src="https://cdn.plot.ly/plotly-2.27.0.min.js"
+      charset="utf-8"
+></script>
 <div
   class="h-min-80 mb-1 mr-1 flex flex-grow gap-2 rounded-lg bg-slate-200 p-2 shadow"
 >
@@ -500,6 +504,7 @@
         />
       </div>
     </div>
+    <a href={% url 'llu_data' %}>click</a>
   </div>
 </div>
 {% endblock %}

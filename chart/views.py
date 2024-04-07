@@ -31,6 +31,15 @@ class SourceViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = SourceFilter
 
+    def destroy(self, request, *args, **kwargs):
+        response = super().destroy(request, *args, **kwargs)
+
+        if request.htmx:
+            response.status_code = 200
+
+        return response
+    
+
 class GlucoseValueViewSet(viewsets.ModelViewSet):
     queryset = GlucoseValue.objects.all().order_by('timestamp')
     serializer_class = GlucoseValueSerializer
@@ -180,7 +189,7 @@ def add_new_source(request):
 
     values = []
     for entry in data["graph_data"]:
-        entry["user"] = User.objects.get(id=request.user.id)
+        entry["user"] = request.user
         entry["source"] = new_source
         entry["time_of_reading"] = _llu_datetime(entry["timestamp"])
         value = GlucoseValue(**entry)
@@ -190,9 +199,28 @@ def add_new_source(request):
     return redirect("graph")
 
 
-
 def _llu_datetime(timestamp):
     return datetime.strptime(timestamp, "%m/%d/%Y %I:%M:%S %p")
+
+
+def get_llu_data(request):
+    for source in Source.objects.filter(user=request.user, type="libre_link_up"):
+        try:
+            _, graph_data = librelinkup.get_device_info(source.token, source.patient_id)
+        
+            values = []
+            for entry in graph_data:
+                entry["user"] = request.user
+                entry["source"] = source
+                entry["time_of_reading"] = _llu_datetime(entry["timestamp"])
+                value = GlucoseValue(**entry)
+                value.save()
+                values.append(value)
+        except:
+            pass
+        
+    return redirect("graph")
+
 
     
 class EntriesView(views.View):

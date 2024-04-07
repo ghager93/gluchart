@@ -29,14 +29,14 @@ class Source(models.Model):
         source, _ = cls.objects.get_or_create(
             name='NO_SOURCE',
             type='',
-            api_key='',
+            token='',
             user=default_user
         )
         return source
     
     class Meta:
         constraints = [
-            constraints.UniqueConstraint(fields=['type', 'patient_id'], name='unique_source')
+            # constraints.UniqueConstraint(fields=['type', 'patient_id'], name='unique_source')
         ]
 
 
@@ -44,7 +44,7 @@ class GlucoseValue(models.Model):
     value = models.CharField(max_length=10, null=True)
     time_of_reading = models.DateTimeField()
     timestamp = models.DateTimeField(editable=False)
-    source = models.ForeignKey(to=Source, on_delete=models.SET_DEFAULT, default=Source.get_default_pk)
+    source = models.ForeignKey(to=Source, on_delete=models.CASCADE)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
