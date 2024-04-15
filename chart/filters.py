@@ -10,7 +10,7 @@ class GlucoseValueFilter(filters.FilterSet):
 
     class Meta:
         model = GlucoseValue
-        fields = ["user", "value", "timestamp"]
+        fields = ["user", "value", "timestamp", "source"]
 
 
 class SourceFilter(filters.FilterSet):

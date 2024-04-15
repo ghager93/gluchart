@@ -2,6 +2,7 @@ import csv
 import math
 from io import TextIOWrapper
 from datetime import datetime, timedelta
+import copy
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -12,7 +13,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from . import librelinkup
 from .models import Source, GlucoseValue
-from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer
+from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer, GlucoseValueDebugSerializer
 from .filters import GlucoseValueFilter, SourceFilter
 from .forms import LibreLinkUp
 from .utils import round_timestamp
@@ -43,6 +44,7 @@ class SourceViewSet(viewsets.ModelViewSet):
 class GlucoseValueViewSet(viewsets.ModelViewSet):
     queryset = GlucoseValue.objects.all().order_by('timestamp')
     serializer_class = GlucoseValueSerializer
+    debug_serializser_class = GlucoseValueDebugSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_class = GlucoseValueFilter
@@ -63,8 +65,54 @@ class GlucoseValueViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)        
-    
+        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)  
+
+    def list(self, request):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            data = serializer.data
+            if "fill" in request.query_params:
+                data = self._fill_null_values(data)
+            return self.get_paginated_response(data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return response.Response(serializer.data)
+
+    def get_serializer_class(self):
+        if "debug" in self.request.query_params:
+            return self.debug_serializser_class
+        return self.serializer_class
+
+    def _fill_null_values(self, data):
+        def ts_diff(ts1, ts2):
+            dt1 = datetime.strptime(ts1, "%Y-%m-%dT%H:%M:%SZ")
+            dt2 = datetime.strptime(ts2, "%Y-%m-%dT%H:%M:%SZ")
+
+            return dt1 - dt2
+
+        if len(data) < 2:
+            return data
+        
+        new_values = [data[0]]
+        left_values = data[:-1]
+        right_values = data[1:]
+        deltas = [ts_diff(right_values[i]["timestamp"], left_values[i]["timestamp"]) for i in range(len(left_values))]
+        for i, delta in enumerate(deltas):
+            num_nulls = delta // timedelta(minutes=15)
+            if num_nulls * timedelta(minutes=15) == delta:
+                num_nulls -= 1
+            for j in range(num_nulls):
+                new_value = copy.deepcopy(data[i])
+                new_value["value"] = None
+                new_dt = datetime.strptime(new_value["timestamp"], "%Y-%m-%dT%H:%M:%SZ") + (j+1)*timedelta(minutes=15)
+                new_value["timestamp"] = datetime.strftime(new_dt, "%Y-%m-%dT%H:%M:%SZ")
+                new_values.append(new_value)
+            new_values.append(data[i+1])
+        
+        return new_values
+        
     @staticmethod
     def add_user_if_not_exist(entry, user_id):
         if "user" not in entry.keys():
