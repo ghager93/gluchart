@@ -177,6 +177,21 @@ files = [
 ]
 
 [[package]]
+name = "crispy-bootstrap4"
+version = "2024.1"
+description = "Bootstrap4 template pack for django-crispy-forms"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "crispy-bootstrap4-2024.1.tar.gz", hash = "sha256:208673bf6a25892a656971af7a00e18ba2f7f06cd4a0d667923bd6134e64d276"},
+    {file = "crispy_bootstrap4-2024.1-py3-none-any.whl", hash = "sha256:46cf98777a28621d240bf71eb36d4a26ff86e9e19be1cfd822645f4043d18c31"},
+]
+
+[package.dependencies]
+django = ">=4.2"
+django-crispy-forms = ">=2.0"
+
+[[package]]
 name = "curtsies"
 version = "0.4.2"
 description = "Curses-like terminal wrapper, with colored strings!"
@@ -255,6 +270,20 @@ tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+
+[[package]]
+name = "django-crispy-forms"
+version = "2.1"
+description = "Best way to have Django DRY forms"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-crispy-forms-2.1.tar.gz", hash = "sha256:4d7ec431933ad4d4b5c5a6de4a584d24613c347db9ac168723c9aaf63af4bb96"},
+    {file = "django_crispy_forms-2.1-py3-none-any.whl", hash = "sha256:d592044771412ae1bd539cc377203aa61d4eebe77fcbc07fbc8f12d3746d4f6b"},
+]
+
+[package.dependencies]
+django = ">=4.2"
 
 [[package]]
 name = "django-extensions"
@@ -601,4 +630,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5e6380a56f955a125b117a5b87d227d03f8340f2ad683c8e80bdbff64b7d8ff8"
+content-hash = "c679dbb191914b4fb7e05dd8c7809a397300a6928c653fd48b9b7a3a5cec85b7"

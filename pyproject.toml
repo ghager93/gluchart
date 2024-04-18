@@ -16,6 +16,8 @@ pyjwt = "^2.8.0"
 django-extensions = "^3.2.3"
 bpython = "^0.24"
 django-htmx = "^1.17.3"
+django-crispy-forms = "^2.1"
+crispy-bootstrap4 = "^2024.1"
 
 
 [build-system]

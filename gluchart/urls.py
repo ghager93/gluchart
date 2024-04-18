@@ -24,7 +24,7 @@ from chart import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'sources', views.SourceViewSet)
-router.register(r'values', views.GlucoseValueViewSet)
+router.register(r'values', views.GlucoseValueViewSet, "values")
 
 urlpatterns = [
     path('', include(router.urls)),

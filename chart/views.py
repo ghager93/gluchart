@@ -10,11 +10,12 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from rest_framework import permissions, viewsets, views, response, status
 from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework.filters import OrderingFilter
 
 from . import librelinkup
 from .models import Source, GlucoseValue
 from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer, GlucoseValueDebugSerializer
-from .filters import GlucoseValueFilter, SourceFilter
+from .filters import GlucoseValueFilter, SourceFilter, VariablePagination
 from .forms import LibreLinkUp
 from .utils import round_timestamp
 
@@ -42,12 +43,17 @@ class SourceViewSet(viewsets.ModelViewSet):
     
 
 class GlucoseValueViewSet(viewsets.ModelViewSet):
-    queryset = GlucoseValue.objects.all().order_by('timestamp')
+    # queryset = GlucoseValue.objects.all().order_by('timestamp')
     serializer_class = GlucoseValueSerializer
     debug_serializser_class = GlucoseValueDebugSerializer
     permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [DjangoFilterBackend]
+    # filter_backends = [OrderingFilter]
     filterset_class = GlucoseValueFilter
+    # filterset_fields = ['value', 'timestamp']
+    pagination_class = VariablePagination
+
+    def get_queryset(self):
+        return GlucoseValue.objects.filter(user=self.request.user).order_by('timestamp')
 
     def create(self, request, *args, **kwargs):
         if isinstance(request.data, list):
