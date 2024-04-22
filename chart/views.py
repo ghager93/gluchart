@@ -17,7 +17,6 @@ from .models import Source, GlucoseValue
 from .serializers import UserSerializer, SourceSerializer, GlucoseValueSerializer, GlucoseValueDebugSerializer
 from .filters import GlucoseValueFilter, SourceFilter, VariablePagination
 from .forms import LibreLinkUp
-from .utils import round_timestamp
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -43,13 +42,11 @@ class SourceViewSet(viewsets.ModelViewSet):
     
 
 class GlucoseValueViewSet(viewsets.ModelViewSet):
-    # queryset = GlucoseValue.objects.all().order_by('timestamp')
-    serializer_class = GlucoseValueSerializer
-    debug_serializser_class = GlucoseValueDebugSerializer
+    serializer_list_class = GlucoseValueSerializer
+    serializer_create_class = GlucoseValueDebugSerializer
+    debug_serializer_class = GlucoseValueDebugSerializer
     permission_classes = [permissions.IsAuthenticated]
-    # filter_backends = [OrderingFilter]
     filterset_class = GlucoseValueFilter
-    # filterset_fields = ['value', 'timestamp']
     pagination_class = VariablePagination
 
     def get_queryset(self):
@@ -58,9 +55,12 @@ class GlucoseValueViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         if isinstance(request.data, list):
             return self.bulk_create(request, *args, **kwargs)
-        if "user" not in request.data.keys():
-            request.data["user"] = request.user.id
-        return super().create(request, *args, **kwargs)
+        request_data = self.add_user_if_not_exist(request.data, request.user.id)
+        serializer = self.get_serializer(data=request_data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return response.Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def bulk_create(self, request, *args, **kwargs):
         request_data = list(map(lambda entry: self.add_user_if_not_exist(entry, request.user.id), request.data))
@@ -88,8 +88,10 @@ class GlucoseValueViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if "debug" in self.request.query_params:
-            return self.debug_serializser_class
-        return self.serializer_class
+            return self.debug_serializer_class
+        if self.action == "list":
+            return self.serializer_list_class
+        return self.serializer_create_class
 
     def _fill_null_values(self, data):
         def ts_diff(ts1, ts2):
