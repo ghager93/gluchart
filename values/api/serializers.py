@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from chart.models import GlucoseValue
+from values.models import GlucoseValue
 
 
 class GlucoseValueSerializer(serializers.ModelSerializer):

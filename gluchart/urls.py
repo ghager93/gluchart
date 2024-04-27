@@ -16,28 +16,34 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
-
-from chart import views
 
 
-router = routers.DefaultRouter()
-router.register(r'users', include('users.api.urls'))
-router.register(r'sources', views.SourceViewSet)
-router.register(r'values', views.GlucoseValueViewSet, "values")
+
+# router = routers.DefaultRouter()
+# router.register('api/users', include('users.api.urls'))
+# router.register('api/sources', include('sources.api.urls'))
+# router.register('api/values', include('values.api.urls'))
+
+# urlpatterns = [
+#     path('', include(router.urls)),
+#     path('admin/', admin.site.urls),
+#     path('batch', views.GlucoseValueBatchCreate.as_view(), name='batch'),
+#     path('graph', views.GraphView.as_view(), name='graph'),
+#     path('data_sources', views.DataSourceView.as_view(), name='data_sources'),
+#     path('data_sources/add', views.AddDataSourceView.as_view(), name='add_data_source'),
+#     path('data_sources/add/2', views.add_new_source, name='add_data_source2'),
+#     path('llu_data', views.get_llu_data, name='llu_data'),
+#     path('entries', views.EntriesView.as_view(), name='entries')
+# ]
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('admin/', admin.site.urls),
-    path('batch', views.GlucoseValueBatchCreate.as_view(), name='batch'),
-    path('graph', views.GraphView.as_view(), name='graph'),
-    path('data_sources', views.DataSourceView.as_view(), name='data_sources'),
-    path('data_sources/add', views.AddDataSourceView.as_view(), name='add_data_source'),
-    path('data_sources/add/2', views.add_new_source, name='add_data_source2'),
-    path('llu_data', views.get_llu_data, name='llu_data'),
-    path('entries', views.EntriesView.as_view(), name='entries')
-]
+    path('api/users', include('users.api.urls')),
+    path('api/sources', include('sources.api.urls')),
+    path('api/values', include('values.api.urls')),
 
-urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls'))
+    # path('sources', include('sources.urls')),
+    # path('values', include('values.urls')),
+
+    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 
 from rest_framework import views, viewsets, permissions, response, status
 
-from chart.models import GlucoseValue
-from chart.filters import GlucoseValueFilter, VariablePagination
+from values.models import GlucoseValue
+from values.filters import GlucoseValueFilter, VariablePagination
 from .serializers import GlucoseValueSerializer, GlucoseValueDebugSerializer
 
 class GlucoseValueViewSet(viewsets.ModelViewSet):
@@ -103,10 +103,10 @@ class GlucoseValueBatchCreate(views.APIView):
         try:
             file_obj = request.FILES['csv_file']
 
-            if not is_csv_type(file_obj):
+            if not _is_csv_type(file_obj):
                 raise Exception("Invalid file format")
             
-            if not is_csv_size_okay(file_obj):
+            if not _is_csv_size_okay(file_obj):
                 raise Exception("File size exceeds allowed limit.")
             
             text_file = TextIOWrapper(file_obj.file, encoding='utf-8')
@@ -121,11 +121,11 @@ class GlucoseValueBatchCreate(views.APIView):
             return response.Response(str(e), status=status.HTTP_400_BAD_REQUEST)
     
 
-def is_csv_type(file_obj):
+def _is_csv_type(file_obj):
     return file_obj.content_type.startswith('text')
     
 
-def is_csv_size_okay(file_obj):
+def _is_csv_size_okay(file_obj):
     MAX_CSV_FILE_SIZE_MB = 5
     return file_obj.size <= MAX_CSV_FILE_SIZE_MB * 1024 * 1024
 
