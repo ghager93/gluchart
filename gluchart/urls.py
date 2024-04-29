@@ -37,12 +37,12 @@ from django.urls import include, path
 # ]
 
 urlpatterns = [
-    path('api/users', include('users.api.urls')),
-    path('api/sources', include('sources.api.urls')),
-    path('api/values', include('values.api.urls')),
+    path('api/', include('users.api.urls')),
+    path('api/', include('sources.api.urls')),
+    path('api/', include('values.api.urls')),
 
-    # path('sources', include('sources.urls')),
-    # path('values', include('values.urls')),
+    path('', include('sources.urls')),
+    path('', include('values.urls')),
 
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
