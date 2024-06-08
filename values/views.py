@@ -39,6 +39,8 @@ def graph_component(request):
     timestamps = [value.time_of_reading.isoformat() for value in values]
     readings = [float(v.value) if v.value else None for v in values]
 
+
+
     return render(request, template_name, {
         "x_values": f"{timestamps}",
         "y_values": f"{readings}".replace("None", "").replace("\'", "").replace("\"", ""),
@@ -49,6 +51,34 @@ def graph_component(request):
 
 def htmx_component(request):
     template_name = 'htmx_component.html'
+    return render(request, template_name)
+
+def htmx_graph(request):
+    template_name = 'htmx_graph.html'
+
+    max_readings = 400
+    n_readings = min(max_readings, GlucoseValue.objects.filter(user=request.user.id).count())
+    values = GlucoseValue.objects.filter(user=request.user.id).order_by("-time_of_reading")[:n_readings]
+    timestamps = [value.time_of_reading.isoformat() for value in values]
+    readings = [float(v.value) if v.value else None for v in values]
+
+    initial_data = {
+        "x": timestamps,
+        "y": readings,
+        "xMin": (values[0].time_of_reading - timedelta(hours=2)).isoformat(),
+        "xMax": values[0].time_of_reading.isoformat()
+    }
+    update_url = "test_url"
+    update_interval = 100
+
+    return render(request, template_name, {
+        "initial_data": initial_data,
+        "update_url": update_url,
+        "update_interval": update_interval
+    })
+
+def htmx_base(request):
+    template_name = 'htmx_base.html'
     return render(request, template_name)
 
 class EntriesView(views.View):
