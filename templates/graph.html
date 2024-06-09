@@ -492,7 +492,7 @@
       }
     });
   </script> {% endcomment %}
-  {% csrf_token %}
+  {% comment %} {% csrf_token %}
   <script>
     document.addEventListener("htmx:configRequest", (event) => {
         event.detail.headers['X-CSRFToken'] = getCookie('csrftoken');
@@ -512,7 +512,7 @@
       }
       return cookieValue;
     }
-  </script>
+  </script> {% endcomment %}
   <div>
     <button hx-get="{% url 'values:htmx_graph' %}" hx-target="#component-placeholder">Create Component</button>
     <div id="component-placeholder"></div>
