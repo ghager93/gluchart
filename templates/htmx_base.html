@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block layout %}
-<button hx-get="{% url 'values:htmx_graph' %}" hx-target="#placeholder">
+<button hx-get="{% url 'values:htmx_graph' %}" hx-target="#placeholder" hx-swap="outerHTML" hx-on::after-request="">
   Add Component
 </button>
 <div id="placeholder"></div>
