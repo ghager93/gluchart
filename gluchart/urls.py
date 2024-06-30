@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from . import views
+
 
 
 # router = routers.DefaultRouter()
@@ -37,6 +39,8 @@ from django.urls import include, path
 # ]
 
 urlpatterns = [
+    path('', views.base_view, name="base_view"),
+    
     path('api/', include('users.api.urls')),
     path('api/', include('sources.api.urls')),
     path('api/', include('values.api.urls')),
