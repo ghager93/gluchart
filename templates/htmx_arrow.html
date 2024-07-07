@@ -1,0 +1,13 @@
+{% load static %}
+<div
+  class="aspect-square right-0 top-0 m-2 rounded-lg bg-slate-300 p-4 shadow"
+>
+  <div class="aspect-square text-center text-6xl">{{ value }}</div>
+  <div class="aspect-square text-center text-xl">{{ timestamp }}</div>
+  <div>
+    <img
+      src="{% static 'icons8-arrow-96.png' %}"
+      class="m-auto rotate-{{ arrow_angle }}"
+    />
+  </div> 
+</div>

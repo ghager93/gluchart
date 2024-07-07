@@ -34,29 +34,6 @@ def graph_view(request: HttpRequest):
     })    
 
 
-def graph_component(request):
-    template_name = 'graph_component.html'
-    max_readings = 400
-    n_readings = min(max_readings, GlucoseValue.objects.filter(user=request.user.id).count())
-    values = GlucoseValue.objects.filter(user=request.user.id).order_by("-time_of_reading")[:n_readings]
-    timestamps = [value.time_of_reading.isoformat() for value in values]
-    readings = [float(v.value) if v.value else None for v in values]
-
-
-
-    return render(request, template_name, {
-        "x_values": f"{timestamps}",
-        "y_values": f"{readings}".replace("None", "").replace("\'", "").replace("\"", ""),
-        "x_range_min": (values[0].time_of_reading - timedelta(hours=2)).isoformat(), 
-        "x_range_max": values[0].time_of_reading.isoformat(),        
-    })
-
-
-def htmx_component(request):
-    template_name = 'htmx_component.html'
-    return render(request, template_name)
-
-
 def htmx_graph(request):
     template_name = 'htmx_graph.html'
 
@@ -83,19 +60,21 @@ def htmx_graph(request):
     })
 
 
-def htmx_base(request):
-    template_name = 'htmx_base.html'
-    return render(request, template_name)
+def htmx_arrow(request):
+    template_name = 'htmx_arrow.html'
 
+    last_values = GlucoseValue.objects.filter(user=request.user.id).order_by('-timestamp')[:2]
 
-class EntriesView(views.View):
-    def get(self, request):
-        return HttpResponse(GlucoseValue.objects.filter(time_of_reading__lt="2020-01-06T00:00:00Z").values('time_of_reading', 'value'))
-    
+    if last_values[0] and last_values[1]:
+        arrow_angle = -int(math.degrees(math.atan(float(last_values[0].value) - float(last_values[1].value))))
+    else:
+        arrow_angle = 0
 
-
-
-
+    return render(request, template_name, {
+        "value": last_values[0].value,
+        "timestamp": last_values[0].timestamp,
+        "arrow_angle": arrow_angle
+    })
 
 
     
